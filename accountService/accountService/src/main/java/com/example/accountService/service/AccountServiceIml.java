@@ -56,8 +56,9 @@ public class AccountServiceIml implements AccountService {
         return new AccountRes(
                 account.getAccountNumber(),
                 account.getBalance(),
-                account.getAccountType(),
-                account.getStatus()
+                account.getStatus(),
+                account.getAccountType()
+
         );
     }
     @Override
@@ -72,8 +73,9 @@ public class AccountServiceIml implements AccountService {
                     new AccountRes(
                             account.getAccountNumber(),
                             account.getBalance(),
-                            account.getStatus(),
-                            account.getAccountType()
+                            account.getAccountType(),
+                            account.getStatus()
+
                     )
             );
         }

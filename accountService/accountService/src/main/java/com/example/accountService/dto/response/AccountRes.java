@@ -23,8 +23,9 @@ public class AccountRes {
         this.accountNumber = accountNumber;
         //this.userId = userId;
         this.balance = balance;
-        this.accountType = accountType;
         this.status = status;
+        this.accountType = accountType;
+
         //this.createdAt = LocalDateTime.now();
         //this.updatedAt = LocalDateTime.now();
 

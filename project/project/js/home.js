@@ -1,8 +1,10 @@
 // =========================
 // ẨN / HIỆN SỐ DƯ
 // =========================
+
 const toggleBtn = document.getElementById("toggleMoney");
 const balanceText = document.getElementById("balance");
+const account_url ="http://localhost:8080/accountService/account"
 
 if (toggleBtn && balanceText) {
     toggleBtn.addEventListener("click", () => {
@@ -19,13 +21,13 @@ if (toggleBtn && balanceText) {
 // =========================
 // CHUYỂN TRANG
 // =========================
-function goLogin() {
-    window.location.href = "login.html";
-}
+// function goLogin() {
+//     window.location.href = "login.html";
+// }
 
-function goTransfer() {
-    window.location.href = "transfer.html";
-}
+// function goTransfer() {
+//     window.location.href = "transfer.html";
+// }
 
 function goHistory() {
     window.location.href = "history.html";

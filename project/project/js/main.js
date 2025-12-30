@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+    requireAuth();
+});
+
 function goLogin() {
     window.location.href = "login.html"; 
 }

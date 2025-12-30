@@ -11,7 +11,7 @@
 <!-- ================= HEADER ================= -->
 <header class="header">
     <div class="logo">Banking System</div>
-
+    <span id="headerUsername"></span>
     <nav class="navbar">
         <a href="home.html">Trang chủ</a>
         <a href="transfer.html">Chuyển khoản</a>
@@ -25,7 +25,7 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
             <div class="dropdown-content">
-                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="profile.html">Thông tin người dùng</a>
                 <a href="index.html">Đăng xuất</a>
             </div>
         </div>
@@ -50,9 +50,9 @@
                     <th>Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- TÀI KHOẢN THANH TOÁN -->
-                <tr>
+            <tbody id="accountTableBody">
+                
+                <!-- <tr>
                     <td>790932459838</td>
                     <td>Thanh toán</td>
                     <td>1,500,000 VND</td>
@@ -61,7 +61,7 @@
                     <td>-</td>
                 </tr>
 
-                <!-- TÀI KHOẢN TIẾT KIỆM -->
+               
                 <tr>
                     <td>TK00012345</td>
                     <td>Tiết kiệm</td>
@@ -73,7 +73,7 @@
                             Tất toán
                         </button>
                     </td>
-                </tr>
+                </tr>  -->
             </tbody>
         </table>
 
@@ -140,8 +140,8 @@
     </div>
 </div>
 
-<!-- ================= MODAL CHUYỂN TIỀN NỘI BỘ ================= -->
-<div id="transferInternalSection" class="modal-overlay">
+<!-- ================= MODAL TẤT TOÁN SỔ TIẾT KIỆM ================= -->
+<!-- <div id="transferInternalSection" class="modal-overlay">
     <div class="modal-card">
         <h2>TẤT TOÁN SỔ TIẾT KIỆM</h2>
 
@@ -155,6 +155,28 @@
 
         <label>Số tiền chuyển</label>
         <input type="number" placeholder="Nhập số tiền">
+
+        <div class="action-center">
+            <button type="button" class="btn primary" id="btnSettleSaving">
+                Xác nhận
+            </button>
+            <button class="btn secondary" onclick="backToList()">Hủy</button>
+        </div>
+    </div>
+</div> -->
+<!-- ================= MODAL TẤT TOÁN SỔ TIẾT KIỆM ================= -->
+<div id="transferInternalSection" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+        <h2>TẤT TOÁN SỔ TIẾT KIỆM</h2>
+
+        <label>Tài khoản tiết kiệm</label>
+        <input type="text" id="savingAccountInput" readonly>
+
+        <label>Tài khoản nhận (Thanh toán)</label>
+        <select id="receiverAccountSelect"></select>
+
+        <label>Số tiền</label>
+        <input type="number" id="settleAmountInput">
 
         <div class="action-center">
             <button type="button" class="btn primary" id="btnSettleSaving">

@@ -354,20 +354,20 @@ async function handleRegister(e) {
 }
 
 // ====== KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP ======
-function checkAuthStatus() {
-    const token = localStorage.getItem('token');
-    if (token) {
-        // Nếu đã đăng nhập, chuyển hướng đến trang chủ
-        window.location.href = "home.html";
-    }
-}
+// function checkAuthStatus() {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//         // Nếu đã đăng nhập, chuyển hướng đến trang chủ
+//         window.location.href = "home.html";
+//     }
+// }
 
 // ====== GẮN SỰ KIỆN ======
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM đã tải xong');
     
     // Kiểm tra trạng thái đăng nhập
-    checkAuthStatus();
+    //checkAuthStatus();
     
     // Hiển thị form đăng nhập mặc định
     showLogin();
