@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý tài khoản - Banking System</title>
+    <link rel="stylesheet" href="css/admin_account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+
+        <div class="nav-admin admin-only">
+            <a class="admin-link">Quản lý <i class="fas fa-chevron-down"></i></a>
+            <div class="admin-dropdown">
+                <a href="admin_account.html">Quản lý tài khoản</a>
+                <a href="admin_user.html">Quản lý người dùng</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="#">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===================== PHẦN TRÊN ===================== -->
+<div class="top-section">
+    <h2>Quản lý tài khoản ngân hàng</h2>
+    <div class="search-box">
+        <input type="text" placeholder="Nhập STK, tên chủ tài khoản hoặc trạng thái...">
+        <button>Tìm</button>
+    </div>
+</div>
+
+<!-- ===================== PHẦN GRID ===================== -->
+<div class="content-wrapper">
+    <div class="layout-grid">
+
+        <!-- TRÁI: chi tiết tài khoản -->
+        <div class="detail-section">
+            <h2>Thông tin chi tiết</h2>
+
+            <div class="detail-box">
+                <label><strong>STK:</strong></label>
+                <input type="text" id="d-stk" readonly>
+
+                <label><strong>Chủ tài khoản:</strong></label>
+                <input type="text" id="d-owner">
+
+                <label><strong>Số dư:</strong></label>
+                <input type="text" id="d-balance">
+
+                <label><strong>Loại tài khoản:</strong></label>
+                <select id="d-type">
+                    <option>Thanh toán</option>
+                    <option>Tiết kiệm</option>
+                </select>
+
+                <label><strong>Trạng thái:</strong></label>
+                <select id="d-status">
+                    <option>Hoạt động</option>
+                    <option>Khóa</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn edit">Lưu thay đổi</button>
+                <button class="btn block">Khóa/Mở khóa</button>
+                <button class="btn delete">Xóa</button>
+            </div>
+        </div>
+
+        <!-- PHẢI: danh sách tài khoản -->
+        <div class="table-section">
+            <h2>Danh sách tài khoản</h2>
+
+            <table class="admin-table" id="accountTable">
+                <thead>
+                    <tr>
+                        <th>STK</th>
+                        <th>Chủ tài khoản</th>
+                        <th>Số dư</th>
+                        <th>Loại tài khoản</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-stk="012345" data-owner="Nguyễn A" data-balance="12,000,000" data-type="Thanh toán" data-status="Hoạt động">
+                        <td>012345</td>
+                        <td>Nguyễn A</td>
+                        <td>12,000,000</td>
+                        <td>Thanh toán</td>
+                        <td class="green">Hoạt động</td>
+                    </tr>
+                    <tr data-stk="987654" data-owner="Trần B" data-balance="2,500,000" data-type="Tiết kiệm" data-status="Khóa">
+                        <td>987654</td>
+                        <td>Trần B</td>
+                        <td>2,500,000</td>
+                        <td>Tiết kiệm</td>
+                        <td class="red">Khóa</td>
+                    </tr>
+                    <tr data-stk="012346" data-owner="Nguyễn C" data-balance="2,000,000" data-type="Thanh toán" data-status="Hoạt động">
+                        <td>012346</td>
+                        <td>Nguyễn C</td>
+                        <td>2,000,000</td>
+                        <td>Thanh toán</td>
+                        <td class="green">Hoạt động</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Giới thiệu</h3>
+            <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 1900 1234</p>
+            <p>📧 support@banking.com</p>
+            <p>📍 123 Trần Phú, Hà Nội</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <a href="#">Bảo mật</a><br>
+            <a href="#">Điều khoản</a><br>
+            <a href="#">Hướng dẫn</a>
+        </div>
+    </div>
+
+    <p class="copyright">© 2025 Banking System</p>
+</footer>
+
+<script src="js/admin_account.js"></script>
+</body>
+</html>

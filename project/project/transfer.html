@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển khoản - Banking System</title>
+    <link rel="stylesheet" href="css/transfer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="logo">Banking System</div>
+
+        <nav class="navbar">
+            <a href="home.html">Trang chủ</a>
+            <a href="transfer.html">Chuyển khoản</a>
+            <a href="notification.html">Thông báo</a>
+            <a href="history.html">Lịch sử giao dịch</a>
+            <div class="nav-admin admin-only">
+                <a class="admin-link">Quản lý <i class="fas fa-chevron-down"></i></a>
+
+                <div class="admin-dropdown">
+                    <a href="admin_account.html">Quản lý tài khoản</a>
+                    <a href="admin_user.html">Quản lý người dùng</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="user-box">
+            <i class="fas fa-user-circle" style="font-size:28px; color:#0056d6;"></i>
+
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+
+                <div class="dropdown-content">
+                    <a href="profile.html">Thông tin tài khoản</a>
+                    <a href="#" onclick="logout()">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN TRANSFER FORM ===== -->
+    <section class="transfer-container">
+        <h2>Chuyển khoản</h2>
+
+        <form class="transfer-form">
+
+            <!-- Tài khoản nguồn -->
+            <label>Tài khoản nguồn:</label>
+            <div class="source-account">
+                <select id="sourceAcc">
+                    <option value="0123456789" data-balance="12000000">0123456789</option>
+                    <option value="0987654321" data-balance="5000000">0987654321</option>
+                </select>
+                <div class="balance" id="sourceBalance">12,000,000 VND</div>
+            </div>
+
+            <!-- Ngân hàng nhận -->
+            <label>Ngân hàng nhận:</label>
+            <select id="bankReceiver">
+                <option value="">Chọn ngân hàng ▼</option>
+                <option>Ngân hàng A</option>
+                <option>Ngân hàng B</option>
+                <option>Ngân hàng C</option>
+            </select>
+
+            <!-- Số tài khoản nhận -->
+            <label>Số tài khoản nhận:</label>
+            <input type="text" id="receiverAcc" placeholder="0987654321">
+
+            <!-- Tên người nhận -->
+            <label>Tên người nhận:</label>
+            <input type="text" id="receiverName" placeholder="Nguyễn Văn B" readonly>
+
+            <!-- Số tiền -->
+            <label>Số tiền:</label>
+            <input type="number" id="amount" placeholder="Nhập số tiền">
+
+            <!-- Nội dung -->
+            <label>Nội dung:</label>
+            <input type="text" id="note" placeholder="Nội dung chuyển tiền">
+
+            <!-- Phí giao dịch -->
+            <label>Phí giao dịch:</label>
+            <div class="fee" id="fee">0đ</div>
+
+            <!-- Nút xác nhận -->
+            <button type="submit" class="confirm-btn">Xác nhận</button>
+        </form>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="footer">
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h3>Giới thiệu</h3>
+                <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>📞 1900 1234</p>
+                <p>📧 support@banking.com</p>
+                <p>📍 123 Trần Phú, Hà Nội</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chính sách</h3>
+                <a href="#">Bảo mật</a><br>
+                <a href="#">Điều khoản</a><br>
+                <a href="#">Hướng dẫn</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">© 2025 Banking System</p>
+    </footer>
+
+    <script src="js/transfer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
