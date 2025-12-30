@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    padding: 15px 40px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ececec;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0056d6;
+}
+
+nav a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+nav a:hover {
+    color: #0056d6;
+}
+
+.auth-buttons button {
+    padding: 7px 12px;
+    background: #0056d6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    height: 350px;
+    background: linear-gradient(to right, #0047ab, #0073e6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.hero-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.hero-buttons button:first-child {
+    background: white;
+    color: #0056d6;
+    font-weight: 600;
+}
+
+.hero-buttons .outline-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+/* SERVICES */
+.services {
+    padding: 50px 30px;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.service-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.service-box {
+    width: 300px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #0000001a;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.service-box img {
+    width: 70px;
+    margin-bottom: 15px;
+}
+
+.service-box h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #0056d6;
+}
+
+.service-box p {
+    font-size: 15px;
+    color: #444;
+}
+
+.service-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px #0000002a;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 40px;
+    background: #0047ab;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #dce7ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .copyright {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #ffffff3a;
+    margin-top: 10px;
+}

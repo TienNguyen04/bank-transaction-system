@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin tài khoản - Banking System</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="index.html">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ========== PROFILE CONTENT ========== -->
+<div class="account-container">
+    <h1>Thông tin tài khoản</h1>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Đang tải thông tin...</p>
+    </div>
+
+    <!-- Profile Card -->
+    <div id="profileContent" style="display: none;">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <img src="img/avatar.png" class="avatar" alt="Avatar" id="userAvatar">
+                <div class="avatar-default" id="avatarDefault">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <div class="info">
+                <p><i class="fas fa-user"></i> <strong>Họ tên:</strong> <span id="fullName">-</span>
+                    <button class="edit-icon-btn" onclick="openEditNameModal()">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </p>
+                <p><i class="fas fa-user-tag"></i> <strong>Tên đăng nhập:</strong> <span id="username">-</span></p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span id="email">-</span></p>
+                <p><i class="fas fa-phone"></i> <strong>Số điện thoại:</strong> <span id="phone">-</span>
+                    <button class="edit-icon-btn" onclick="openEditPhoneModal()">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </p>
+                <p><i class="fas fa-user-shield"></i> <strong>Quyền hạn:</strong> <span id="role">-</span></p>
+                <p><i class="fas fa-circle"></i> <strong>Trạng thái:</strong> <span id="status">-</span></p>
+            </div>
+        </div>
+
+        <!-- Account Info Card -->
+        <div class="account-card">
+            <h2><i class="fas fa-info-circle"></i> Thông tin bổ sung</h2>
+            <p><i class="fas fa-calendar-plus"></i> <strong>Tài khoản được tạo:</strong> <span id="createdAt">-</span></p>
+            <p><i class="fas fa-calendar-check"></i> <strong>Cập nhật lần cuối:</strong> <span id="updatedAt">-</span></p>
+            <p><i class="fas fa-sign-in-alt"></i> <strong>Đăng nhập gần nhất:</strong> <span id="lastLogin">-</span></p>
+            <p><i class="fas fa-id-card"></i> <strong>ID người dùng:</strong> <span id="userId">-</span></p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn edit-btn" onclick="openEditProfileModal()">
+                <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+            </button>
+            <button class="action-btn password-btn" onclick="openChangePasswordModal()">
+                <i class="fas fa-key"></i> Đổi mật khẩu
+            </button>
+            <button class="action-btn logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage" class="error-message" style="display: none;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p id="errorText"></p>
+        <button class="retry-btn" onclick="loadUserProfile()">
+            <i class="fas fa-redo"></i> Thử lại
+        </button>
+    </div>
+</div>
+
+<!-- ========== MODAL ĐỔI TÊN ========== -->
+<div id="editNameModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-edit"></i> Chỉnh sửa họ tên</h3>
+            <button class="modal-close" onclick="closeEditNameModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="newFullName"><i class="fas fa-user"></i> Họ tên mới:</label>
+                <input type="text" id="newFullName" placeholder="Nhập họ tên mới" maxlength="100">
+            </div>
+            <div class="form-hint">
+                <i class="fas fa-info-circle"></i> Họ tên có thể chứa tối đa 100 ký tự
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn cancel-btn" onclick="closeEditNameModal()">
+                <i class="fas fa-times"></i> Hủy
+            </button>
+            <button class="modal-btn save-btn" onclick="updateFullName()">
+                <i class="fas fa-save"></i> Cập nhật
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL ĐỔI SỐ ĐIỆN THOẠI ========== -->
+<div id="editPhoneModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-phone-alt"></i> Chỉnh sửa số điện thoại</h3>
+            <button class="modal-close" onclick="closeEditPhoneModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="newPhone"><i class="fas fa-mobile-alt"></i> Số điện thoại mới:</label>
+                <input type="tel" id="newPhone" placeholder="Nhập số điện thoại mới" pattern="[0-9]{10,15}">
+            </div>
+            <div class="form-hint">
+                <i class="fas fa-info-circle"></i> Số điện thoại phải có 10-15 chữ số
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn cancel-btn" onclick="closeEditPhoneModal()">
+                <i class="fas fa-times"></i> Hủy
+            </button>
+            <button class="modal-btn save-btn" onclick="updatePhoneNumber()">
+                <i class="fas fa-save"></i> Cập nhật
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL ĐỔI MẬT KHẨU ========== -->
+<div id="changePasswordModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-key"></i> Đổi mật khẩu</h3>
+            <button class="modal-close" onclick="closeChangePasswordModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="oldPassword"><i class="fas fa-lock"></i> Mật khẩu cũ:</label>
+                <input type="password" id="oldPassword" placeholder="Nhập mật khẩu cũ">
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('oldPassword', this)"></i>
+            </div>
+            <div class="form-group">
+                <label for="newPassword"><i class="fas fa-lock"></i> Mật khẩu mới:</label>
+                <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới">
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword', this)"></i>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword"><i class="fas fa-lock"></i> Xác nhận mật khẩu mới:</label>
+                <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới">
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+            </div>
+            <div class="form-hint">
+                <i class="fas fa-info-circle"></i> Mật khẩu phải có ít nhất 6 ký tự
+            </div>
+            <div class="password-strength">
+                <span>Độ mạnh mật khẩu:</span>
+                <div class="strength-meter">
+                    <div class="strength-bar" id="strengthBar"></div>
+                </div>
+                <span class="strength-text" id="strengthText">Yếu</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn cancel-btn" onclick="closeChangePasswordModal()">
+                <i class="fas fa-times"></i> Hủy
+            </button>
+            <button class="modal-btn save-btn" onclick="updatePassword()">
+                <i class="fas fa-save"></i> Cập nhật
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL CHỈNH SỬA THÔNG TIN ========== -->
+<div id="editProfileModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-cog"></i> Chỉnh sửa thông tin cá nhân</h3>
+            <button class="modal-close" onclick="closeEditProfileModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="editFullName"><i class="fas fa-user"></i> Họ tên:</label>
+                <input type="text" id="editFullName" placeholder="Nhập họ tên" maxlength="100">
+            </div>
+            <div class="form-group">
+                <label for="editPhone"><i class="fas fa-mobile-alt"></i> Số điện thoại:</label>
+                <input type="tel" id="editPhone" placeholder="Nhập số điện thoại" pattern="[0-9]{10,15}">
+            </div>
+            <div class="form-hint">
+                <i class="fas fa-exclamation-triangle"></i> Email không thể thay đổi
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn cancel-btn" onclick="closeEditProfileModal()">
+                <i class="fas fa-times"></i> Hủy
+            </button>
+            <button class="modal-btn save-btn" onclick="updateProfile()">
+                <i class="fas fa-save"></i> Cập nhật tất cả
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Giới thiệu</h3>
+            <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 1900 1234</p>
+            <p>📧 support@banking.com</p>
+            <p>📍 123 Trần Phú, Hà Nội</p>
+        </div>
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <a href="#">Bảo mật</a><br>
+            <a href="#">Điều khoản</a><br>
+            <a href="#">Hướng dẫn</a>
+        </div>
+    </div>
+    <p class="copyright">© 2025 Banking System</p>
+</footer>
+
+<script src="js/profile.js"></script>
+</body>
+</html>

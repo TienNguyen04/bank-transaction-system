@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+.header {
+    width: 100%;
+    padding: 15px 40px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ececec;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0056d6;
+}
+
+.navbar a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: #0056d6;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 0 12px #0003;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background: #f1f1f1;
+}
+
+/* ADMIN DROPDOWN */
+.nav-admin {
+    position: relative;
+    display: inline-block;
+}
+
+.admin-link {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    padding: 0 12px;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    color: #0056d6;
+}
+
+.admin-dropdown {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 0 10px #0003;
+    border-radius: 8px;
+    display: none;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.nav-admin:hover .admin-dropdown {
+    display: block;
+}
+
+.admin-dropdown a {
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+.admin-dropdown a:hover {
+    background: #f1f1f1;
+}
+
+/* Form chuyển khoản */
+.transfer-container {
+    max-width: 500px;        /* Giới hạn chiều rộng form */
+    margin: 50px auto;
+    background: #ffffff;     /* nền trắng */
+    border-radius: 12px;     /* bo góc */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* shadow nhẹ */
+    padding: 30px 25px;
+}
+
+.transfer-container h2 {
+    font-size: 28px;
+    color: #0047ab;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Tài khoản nguồn hai ô */
+.source-account {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.source-account select {
+    flex: 2;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.source-account .balance {
+    flex: 1;
+    padding: 12px;
+    background: #eef4ff;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #0056d6;
+}
+
+/* Các label và input/select */
+.transfer-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.transfer-form input, 
+.transfer-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.transfer-form input:focus,
+.transfer-form select:focus {
+    outline: none;
+    border-color: #0056d6;
+    box-shadow: 0 0 6px rgba(0, 86, 214, 0.3);
+}
+
+/* Phí giao dịch */
+.fee {
+    margin-top: 6px;
+    font-weight: bold;
+    color: #0056d6;
+}
+
+/* Nút xác nhận */
+.confirm-btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background: #0056d6;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.confirm-btn:hover {
+    background: #0041a3;
+    transform: translateY(-2px);
+}
+
+
+/* FOOTER */
+footer {
+    margin-top: 40px;
+    background: #0047ab;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #dce7ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .copyright {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #ffffff3a;
+    margin-top: 10px;
+}

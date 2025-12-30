@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý tài khoản - Banking System</title>
+    <link rel="stylesheet" href="css/account_list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="index.html">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ================= CONTENT ================= -->
+<div class="content-wrapper">
+
+    <!-- ===== DANH SÁCH TÀI KHOẢN ===== -->
+    <section id="listSection">
+        <h2>DANH SÁCH TÀI KHOẢN</h2>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Số tài khoản</th>
+                    <th>Loại tài khoản</th>
+                    <th>Số dư khả dụng</th>
+                    <th>Ngày mở</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TÀI KHOẢN THANH TOÁN -->
+                <tr>
+                    <td>790932459838</td>
+                    <td>Thanh toán</td>
+                    <td>1,500,000 VND</td>
+                    <td>01/01/2024</td>
+                    <td class="green">Hoạt động</td>
+                    <td>-</td>
+                </tr>
+
+                <!-- TÀI KHOẢN TIẾT KIỆM -->
+                <tr>
+                    <td>TK00012345</td>
+                    <td>Tiết kiệm</td>
+                    <td>5,000,000 VND</td>
+                    <td>01/03/2024</td>
+                    <td class="green">Hoạt động</td>
+                    <td>
+                        <button class="btn primary small" onclick="showTransferInternal()">
+                            Tất toán
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="action-center">
+            <button class="btn danger" onclick="showLock()">Khóa tài khoản</button>
+            <button class="btn primary" onclick="showSaving()">Mở tài khoản tiết kiệm</button>
+        </div>
+    </section>
+
+</div>
+
+<!-- ================= MODAL KHÓA TÀI KHOẢN ================= -->
+<div id="lockSection" class="modal-overlay">
+    <div class="modal-card">
+        <h2>CHỌN TÀI KHOẢN ĐỂ KHÓA</h2>
+
+        <div class="account-card">
+            <div>
+                <strong>NGUYỄN THÙY TIÊN</strong>
+                <p>STK: 790932459838</p>
+                <p>Số dư: 1,500,000 VND</p>
+            </div>
+            <input type="radio" name="lockAccount">
+        </div>
+
+        <div class="action-center">
+            <button class="btn danger">Xác nhận khóa</button>
+            <button class="btn secondary" onclick="backToList()">Quay lại</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL MỞ TÀI KHOẢN TIẾT KIỆM ================= -->
+<div id="savingSection" class="modal-overlay">
+    <div class="modal-card">
+        <h2>MỞ TÀI KHOẢN TIẾT KIỆM</h2>
+
+        <form class="saving-form">
+            <label>Số tài khoản nguồn</label>
+            <input type="text" value="790932459838" readonly>
+
+            <label>Số tiền gửi</label>
+            <input type="number" required>
+
+            <label>Kỳ hạn</label>
+            <select>
+                <option>1 tháng</option>
+                <option>3 tháng</option>
+                <option>6 tháng</option>
+                <option>12 tháng</option>
+            </select>
+
+            <label>Hình thức nhận lãi</label>
+            <select>
+                <option>Cuối kỳ</option>
+                <option>Hàng tháng</option>
+            </select>
+
+            <div class="action-center">
+                <button class="btn primary">Đăng ký</button>
+                <button type="button" class="btn secondary" onclick="backToList()">Hủy</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================= MODAL CHUYỂN TIỀN NỘI BỘ ================= -->
+<div id="transferInternalSection" class="modal-overlay">
+    <div class="modal-card">
+        <h2>TẤT TOÁN SỔ TIẾT KIỆM</h2>
+
+        <label>Tài khoản tiết kiệm</label>
+        <input type="text" value="TK00012345" readonly>
+
+        <label>Tài khoản nhận</label>
+        <select>
+            <option>790932459838</option>
+        </select>
+
+        <label>Số tiền chuyển</label>
+        <input type="number" placeholder="Nhập số tiền">
+
+        <div class="action-center">
+            <button type="button" class="btn primary" id="btnSettleSaving">
+                Xác nhận
+            </button>
+            <button class="btn secondary" onclick="backToList()">Hủy</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MESSAGE BOX ================= -->
+<div id="messageOverlay" class="modal-overlay">
+    <div class="modal-card message-box">
+        <p id="messageText"></p>
+        <div class="action-center">
+            <button class="btn primary" onclick="closeMessage()">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Về chúng tôi</h3>
+            <p>Hệ thống Banking System hỗ trợ giao dịch ngân hàng trực tuyến an toàn, nhanh chóng và tiện lợi.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 Hotline: 1900 1234</p>
+            <p>📧 Email: support@banking.com</p>
+            <p>📍 Địa chỉ: 123 Trần Phú, Hà Nội</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <p><a href="#">Bảo mật thông tin</a></p>
+            <p><a href="#">Điều khoản sử dụng</a></p>
+            <p><a href="#">Hướng dẫn người dùng</a></p>
+        </div>
+    </div>
+
+    <p class="copyright">© 2025 Banking System - All Rights Reserved.</p>
+</footer>
+
+<script src="js/account_list.js"></script>
+</body>
+</html>

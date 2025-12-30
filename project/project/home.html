@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Banking System</title>
+
+    <link rel="stylesheet" href="css/home.css">
+    <script defer src="js/home.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="index.html">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- ========== ACCOUNT AREA ========== -->
+    <section class="account-container">
+        <div class="account-content">
+            <h2 class="welcome">Xin chào, <span id="usernameBig">User</span></h2>
+
+            <div class="account-row">
+                <div class="account-item">
+                    <span class="label">Số tài khoản:</span>
+                    <span class="value" id="accNumber">0123456789</span>
+                </div>
+            
+                <div class="account-item balance">
+                    <span class="label">Số dư:</span>
+                    <span class="value money" id="balance">12,000,000 VND</span>
+                    <i class="fas fa-eye eye-icon" id="toggleMoney"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CHỨC NĂNG ========== -->
+    <section class="feature-box">
+        <h2>Chức năng</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card" onclick="goTransfer()">
+                <i class="fas fa-paper-plane icon"></i>
+                <p>Chuyển khoản</p>
+            </div>
+
+            <div class="feature-card" onclick="goHistory()">
+                <i class="fas fa-history icon"></i>
+                <p>Lịch sử giao dịch</p>
+            </div>
+
+            <div class="feature-card" onclick="goNotification()">
+                <i class="fas fa-bell icon"></i>
+                <p>Thông báo</p>
+            </div>
+
+            <div class="feature-card admin-only" onclick="goAccount()">
+                <i class="fas fa-user-cog icon"></i>
+                <p>Quản lý</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========== NOTIFICATION ========== -->
+    <section class="notification-box">
+        <h2>Hoạt động gần đây</h2>
+
+        <ul>
+            <li>🔔 Tài khoản của bạn đã được cập nhật thông tin bảo mật.</li>
+            <li>🔔 Ghi nhận đăng nhập từ thiết bị mới lúc 09:45.</li>
+            <li>🔔 Bạn đã thay đổi mật khẩu thành công lúc 08:20.</li>
+            <li>🔔 Khuyến mãi: Miễn phí chuyển tiền nội bộ tháng này.</li>
+        </ul>
+
+        <a class="view-more" href="notification.html">Xem thêm</a>
+    </section>
+
+    <!-- ========== TRANSACTION ========== -->
+    <section class="transaction-box">
+        <h2>Lịch sử giao dịch mới</h2>
+
+        <table>
+            <tr>
+                <th>Thời gian</th>
+                <th>Nội dung</th>
+                <th>Số tiền</th>
+            </tr>
+
+            <tr>
+                <td>10/12</td>
+                <td>Nhận tiền từ A</td>
+                <td class="plus">+2,000,000</td>
+            </tr>
+
+            <tr>
+                <td>09/12</td>
+                <td>Chuyển cho B</td>
+                <td class="minus">-500,000</td>
+            </tr>
+
+            <tr>
+                <td>08/12</td>
+                <td>Thanh toán Internet</td>
+                <td class="minus">-250,000</td>
+            </tr>
+        </table>
+
+        <a class="view-more" href="transaction_history.html">Xem toàn bộ</a>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="footer">
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h3>Giới thiệu</h3>
+                <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>📞 1900 1234</p>
+                <p>📧 support@banking.com</p>
+                <p>📍 123 Trần Phú, Hà Nội</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chính sách</h3>
+                <a href="#">Bảo mật</a><br>
+                <a href="#">Điều khoản</a><br>
+                <a href="#">Hướng dẫn</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">© 2025 Banking System</p>
+    </footer>
+
+</body>
+</html>

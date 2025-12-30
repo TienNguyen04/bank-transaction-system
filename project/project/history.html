@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử giao dịch - Banking System</title>
+
+    <link rel="stylesheet" href="css/history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="index.html">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ========== CONTENT ========== -->
+<section class="history-container">
+    <h2>Lịch sử giao dịch</h2>
+
+    <!-- Bộ lọc -->
+    <div class="filter-box">
+        <select>
+            <option>Tất cả giao dịch</option>
+            <option>Chuyển tiền</option>
+            <option>Nhận tiền</option>
+        </select>
+
+        <select>
+            <option>7 ngày gần đây</option>
+            <option>30 ngày gần đây</option>
+            <option>90 ngày</option>
+        </select>
+    </div>
+
+    <!-- Bảng giao dịch -->
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Ngày</th>
+                <th>Loại giao dịch</th>
+                <th>Số tiền</th>
+                <th>Tên đối tác</th>
+                <th>Nội dung</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>12/12/2025</td>
+                <td>
+                    <span class="type send">
+                        <i class="fa-solid fa-arrow-up"></i> Chuyển đi
+                    </span>
+                </td>
+                <td class="money red">- 1,000,000đ</td>
+                <td>Nguyễn Văn B</td>
+                <td>Tiền ăn</td>
+            </tr>
+
+            <tr>
+                <td>10/12/2025</td>
+                <td>
+                    <span class="type receive">
+                        <i class="fa-solid fa-arrow-down"></i> Nhận tiền
+                    </span>
+                </td>
+                <td class="money green">+ 2,500,000đ</td>
+                <td>Trần Thị C</td>
+                <td>Thanh toán</td>
+            </tr>
+
+            <tr>
+                <td>05/12/2025</td>
+                <td>
+                    <span class="type send">
+                        <i class="fa-solid fa-arrow-up"></i> Chuyển đi
+                    </span>
+                </td>
+                <td class="money red">- 350,000đ</td>
+                <td>Lê Quốc D</td>
+                <td>Mua hàng</td>
+            </tr>
+
+            <tr>
+                <td>15/11/2025</td>
+                <td>
+                    <span class="type send">
+                        <i class="fa-solid fa-arrow-up"></i> Chuyển đi
+                    </span>
+                </td>
+                <td class="money red">- 1,000,000đ</td>
+                <td>Nguyễn Văn B</td>
+                <td>Tiền ăn</td>
+            </tr>
+
+            <tr>
+                <td>05/11/2025</td>
+                <td>
+                    <span class="type send">
+                        <i class="fa-solid fa-arrow-up"></i> Chuyển đi
+                    </span>
+                </td>
+                <td class="money red">- 350,000đ</td>
+                <td>Lê Quốc D</td>
+                <td>Mua hàng</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer id="footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Giới thiệu</h3>
+            <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 1900 1234</p>
+            <p>📧 support@banking.com</p>
+            <p>📍 123 Trần Phú, Hà Nội</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <a href="#">Bảo mật</a><br>
+            <a href="#">Điều khoản</a><br>
+            <a href="#">Hướng dẫn</a>
+        </div>
+
+    </div>
+
+    <p class="copyright">© 2025 Banking System</p>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

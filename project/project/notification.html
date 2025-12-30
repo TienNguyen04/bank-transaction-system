@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo - Banking System</title>
+    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="index.html">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <!-- ====== NOTIFICATION MAIN ====== -->
+    <section class="notification-container">
+
+        <h2 class="title">Thông báo</h2>
+
+        <!-- ====== 4.1 BỘ LỌC ====== -->
+        <div class="filter-box">
+            <label>Hiển thị:</label>
+            <button class="filter active" data-filter="all">Tất cả</button>
+            <button class="filter" data-filter="unread">Chưa đọc</button>
+            <button class="filter" data-filter="read">Đã đọc</button>
+        </div>
+
+        <!-- ====== DANH SÁCH THÔNG BÁO ====== -->
+
+        <!-- Hôm nay -->
+        <div class="date-box">📅 Hôm nay</div>
+
+        <div class="notify-item unread">
+            <div class="time">08:30</div>
+            <div class="content">🔔 Tài khoản của bạn đã được cập nhật thông tin bảo mật.</div>
+        </div>
+
+        <div class="notify-item unread">
+            <div class="time">07:10</div>
+            <div class="content">💬 Bạn vừa nhận 2,000,000 VND từ Nguyễn Văn A.</div>
+        </div>
+
+        <hr>
+
+        <!-- Hôm qua -->
+        <div class="date-box">📅 Hôm qua</div>
+
+        <div class="notify-item read">
+            <div class="time status">(Đã đọc)</div>
+            <div class="content">🔑 Bạn đã đổi mật khẩu thành công.</div>
+        </div>
+
+        <div class="notify-item read">
+            <div class="time status">(Đã đọc)</div>
+            <div class="content">✔ Thanh toán tiền điện thành công lúc 14:32.</div>
+        </div>
+
+        <hr>
+
+        <!-- Tuần này -->
+        <div class="date-box">📅 Tuần này</div>
+
+        <div class="notify-item unread">
+            <div class="time">Thứ 2</div>
+            <div class="content">📩 Khuyến mãi: Nhận hoàn 20% phí dịch vụ khi chuyển tiền quốc tế.</div>
+        </div>
+
+        <div class="notify-item read">
+            <div class="time status">(Đã đọc)</div>
+            <div class="content">📢 Cập nhật điều khoản sử dụng dịch vụ.</div>
+        </div>
+
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="footer">
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h3>Giới thiệu</h3>
+                <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>📞 1900 1234</p>
+                <p>📧 support@banking.com</p>
+                <p>📍 123 Trần Phú, Hà Nội</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chính sách</h3>
+                <a href="#">Bảo mật</a><br>
+                <a href="#">Điều khoản</a><br>
+                <a href="#">Hướng dẫn</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">© 2025 Banking System</p>
+    </footer>
+
+<script src="js/notification.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
