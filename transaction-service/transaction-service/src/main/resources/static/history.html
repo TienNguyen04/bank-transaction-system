@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử giao dịch - Banking System</title>
+
+    <link rel="stylesheet" href="css/history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">Banking System</div>
+
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html" class="active" style="color: #0056d6;">Lịch sử giao dịch</a>
+    </nav>
+
+    <div class="user-box">
+        <i class="fas fa-user-circle user-icon"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="#" onclick="logout()">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="history-container">
+    <h2>Lịch sử giao dịch</h2>
+
+    <div class="filter-box">
+        <select id="filter-type">
+            <option value="ALL">Tất cả giao dịch</option>
+            <option value="TRANSFER">Chuyển khoản</option>
+            <option value="DEPOSIT">Nạp/Rút tiền</option>
+        </select>
+
+        <select>
+            <option>30 ngày gần đây</option>
+            <option>7 ngày gần đây</option>
+        </select>
+
+        <button onclick="loadHistory()" style="padding: 0 15px; background: #0056d6; color: white; border: none; border-radius: 8px; cursor: pointer;">Tải lại</button>
+    </div>
+
+    <table class="history-table">
+        <thead>
+        <tr>
+            <th>Ngày</th>
+            <th>Loại giao dịch</th>
+            <th>Số tiền</th>
+            <th>Đối tác</th>
+            <th>Nội dung</th>
+        </tr>
+        </thead>
+
+        <tbody id="history-list">
+        </tbody>
+    </table>
+
+    <p id="no-data" style="text-align: center; margin-top: 20px; color: #888; display: none;">Chưa có giao dịch nào.</p>
+</section>
+
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Giới thiệu</h3>
+            <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 1900 1234</p>
+            <p>📧 support@banking.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <a href="#">Bảo mật</a><br>
+            <a href="#">Điều khoản</a>
+        </div>
+    </div>
+    <p class="copyright">© 2025 Banking System</p>
+</footer>
+
+<script src="js/history.js"></script>
+
+</body>
+</html>

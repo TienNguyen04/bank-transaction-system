@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Banking System</title>
+    <link rel="stylesheet" href="../../../../../../project/css/login.css">
+</head>
+<body>
+    <header>
+        <div class="logo">BANKING SYSTEM</div>
+
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="#services">Dịch vụ</a>
+            <a href="#footer">Hỗ trợ</a>
+        </nav>
+
+        <div class="auth-buttons">
+            <button onclick="goLogin()">Đăng nhập</button>
+        </div>
+    </header>
+
+<div class="login-container">
+
+    <!-- FORM ĐĂNG NHẬP -->
+    <div class="form-box active" id="loginFormBox">
+        <h2>Đăng Nhập</h2>
+        <p class="subtitle">Chào mừng bạn quay trở lại</p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Tài khoản</label>
+                <input type="text" id="loginUser" placeholder="Nhập tên đăng nhập" required>
+            </div>
+
+            <div class="input-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="loginPass" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <button class="btn">Đăng nhập</button>
+            <p class="error" id="loginError"></p>
+
+            <div class="links">
+                <a href="#" onclick="showForgot()">Quên mật khẩu?</a>
+                <a href="#" onclick="showRegister()">Đăng ký</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- FORM QUÊN MẬT KHẨU -->
+    <div class="form-box" id="forgotFormBox">
+        <h2>Quên Mật Khẩu</h2>
+        <p class="subtitle">Nhập email để nhận mã khôi phục</p>
+
+        <form id="forgotForm">
+            <div class="input-group">
+                <label>Email khôi phục</label>
+                <input type="email" id="forgotEmail" placeholder="Nhập email" required>
+            </div>
+
+            <button class="btn">Gửi mã</button>
+            <p class="error" id="forgotError"></p>
+
+            <div class="links">
+                <a href="#" onclick="showLogin()">Quay lại đăng nhập</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- FORM ĐĂNG KÝ -->
+    <div class="form-box" id="registerFormBox">
+        <h2>Đăng Ký</h2>
+        <p class="subtitle">Tạo tài khoản mới</p>
+
+        <form id="registerForm">
+            <div class="input-group">
+                <label>Tài khoản</label>
+                <input type="text" id="regUser" placeholder="Nhập tên đăng nhập" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" placeholder="Nhập email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="regPass" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <button class="btn">Đăng ký</button>
+            <p class="error" id="regError"></p>
+
+            <div class="links">
+                <a href="#" onclick="showLogin()">Đã có tài khoản? Đăng nhập</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!-- ========== FOOTER ========== -->
+    <footer id="footer">
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h3>Giới thiệu</h3>
+                <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>📞 1900 1234</p>
+                <p>📧 support@banking.com</p>
+                <p>📍 123 Trần Phú, Hà Nội</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chính sách</h3>
+                <a href="#">Bảo mật</a><br>
+                <a href="#">Điều khoản</a><br>
+                <a href="#">Hướng dẫn</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">© 2025 Banking System</p>
+    </footer>
+
+<script src="login.js"></script>
+</body>
+</html>

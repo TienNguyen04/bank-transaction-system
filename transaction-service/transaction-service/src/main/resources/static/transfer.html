@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển khoản - Banking System</title>
+
+    <link rel="stylesheet" href="css/transfer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .msg-error {
+            color: red;
+            font-size: 0.85em;
+            display: none;
+            margin-top: 5px;
+        }
+        .input-loading {
+            background-color: #f9f9f9;
+            cursor: wait;
+            color: #888;
+        }
+        /* Style riêng cho phần hiển thị số dư */
+        .balance-info {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #0056d6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">Banking System</div>
+    <nav class="navbar">
+        <a href="home.html">Trang chủ</a>
+        <a href="transfer.html" class="active" style="color: #0056d6;">Chuyển khoản</a>
+        <a href="notification.html">Thông báo</a>
+        <a href="history.html">Lịch sử giao dịch</a>
+
+        <div class="nav-admin admin-only">
+            <a class="admin-link">Quản lý <i class="fas fa-chevron-down"></i></a>
+            <div class="admin-dropdown">
+                <a href="admin_account.html">Quản lý tài khoản</a>
+                <a href="admin_user.html">Quản lý người dùng</a>
+            </div>
+        </div>
+    </nav>
+    <div class="user-box">
+        <i class="fas fa-user-circle" style="font-size:28px; color:#0056d6;"></i>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="profile.html">Thông tin tài khoản</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="transfer-container">
+    <h2>Chuyển khoản</h2>
+
+    <form class="transfer-form" id="transferForm">
+
+        <label>Tài khoản nguồn (Của bạn):</label>
+        <div class="source-account">
+            <input
+                    type="text"
+                    id="myAccountNumber"
+                    readonly
+                    value="Đang tải..."
+                    style="background: #e9ecef; cursor: not-allowed; color: #555;"
+            >
+            <div class="balance-info">
+                Số dư khả dụng: <span id="myBalance">...</span>
+            </div>
+        </div>
+
+        <label>Ngân hàng nhận:</label>
+        <select id="bankReceiver">
+            <option value="INTERNAL">Nội bộ (Banking System)</option>
+            <option value="BANK_A">Ngân hàng A (Khác)</option>
+            <option value="BANK_B">Ngân hàng B (Khác)</option>
+        </select>
+
+        <label>Số tài khoản nhận:</label>
+        <input type="text" id="receiverAcc" placeholder="Nhập số tài khoản người nhận" required>
+        <span id="msgError" class="msg-error"></span>
+
+        <label>Tên người nhận:</label>
+        <input type="text" id="receiverName" placeholder="Tên người nhận sẽ hiện tự động..." readonly>
+
+        <label>Số tiền:</label>
+        <input type="number" id="amount" placeholder="Nhập số tiền" required min="1000">
+
+        <label>Nội dung:</label>
+        <input type="text" id="note" placeholder="Nội dung chuyển tiền">
+
+        <label>Phí giao dịch:</label>
+        <div class="fee" id="fee">Miễn phí</div>
+
+        <button type="submit" class="confirm-btn">Xác nhận chuyển tiền</button>
+    </form>
+</section>
+
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Về chúng tôi</h3>
+            <p>Hệ thống Banking System hỗ trợ giao dịch ngân hàng trực tuyến an toàn.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 Hotline: 1900 1234</p>
+        </div>
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <p><a href="#">Bảo mật thông tin</a></p>
+        </div>
+    </div>
+    <p class="copyright">© 2025 Banking System - All Rights Reserved.</p>
+</footer>
+
+<script src="js/transfer.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
