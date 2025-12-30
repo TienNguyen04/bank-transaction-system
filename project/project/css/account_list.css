@@ -374,3 +374,67 @@ footer .copyright {
     border-top: 1px solid #ffffff4d;
     margin-top: 20px;
 }
+
+/* ======================================================
+   ============ INTERNAL TRANSFER (NEW) =================
+====================================================== */
+
+/* Button nhỏ trong bảng */
+.btn.small {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+/* Modal chuyển tiền nội bộ */
+#transferInternalSection .modal-card {
+    width: 600px;
+}
+
+/* Label trong modal chuyển tiền */
+#transferInternalSection label {
+    font-weight: 600;
+    margin-top: 12px;
+    display: block;
+}
+
+/* Input & select trong modal chuyển tiền */
+#transferInternalSection input,
+#transferInternalSection select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d2d2d2;
+    background: #fafafa;
+}
+
+/* Focus effect */
+#transferInternalSection input:focus,
+#transferInternalSection select:focus {
+    border-color: #0047ab;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,71,171,0.15);
+}
+
+/* Input readonly */
+#transferInternalSection input[readonly] {
+    background: #eef2f8;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* Khoảng cách nút trong modal */
+#transferInternalSection .action-center {
+    margin-top: 22px;
+}
+
+.message-box {
+    max-width: 400px;
+    text-align: center;
+}
+
+#messageText {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
