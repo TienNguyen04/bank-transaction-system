@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: savingService
+
+  datasource:
+    url: jdbc:postgresql://26.169.181.65:5432/bankdb_sang
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8083
+  servlet:
+    context-path: /savingService-Tien
+
+jwt:
+  secret: "/dDMtv80KZSwPmYUT6r0Qj6LJNpSwCmwt7hqv0x5hc+RgNz3v6bFYVF3IrWjTsxLj//ddVXi34mNrEZ454nmGg=="
+  expiration: 86400000

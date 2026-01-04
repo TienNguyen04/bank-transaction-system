@@ -1,0 +1,52 @@
+"id","username","password","email","phone","full_name","role","status","created_at","updated_at","last_login"
+"1","janebui174","hashed_password_example_123","janebui174@gmail.com","07 2442013","Lâm Phú Mai","USER","ACTIVE","2024-03-23 09:17:43.168061",NULL,NULL
+"2","lejane444","hashed_password_example_123","lejane444@gmail.com","01 5480854","Ông Quang Dương","ADMIN","ACTIVE","2024-09-03 20:01:34.413734",NULL,NULL
+"3","janemai543","hashed_password_example_123","janemai543@gmail.com","+84 21 1860610","Quang Hoàng Dương","USER","ACTIVE","2025-06-28 21:34:09.480258",NULL,NULL
+"4","janetran217","hashed_password_example_123","janetran217@gmail.com","(00) 9515 7174","Thành Bảo Hoàng","USER","ACTIVE","2025-04-10 04:54:35.766291",NULL,NULL
+"5","johnmai457","hashed_password_example_123","johnmai457@gmail.com","+84-63-109 5746","Khoa Trần","ADMIN","ACTIVE","2024-01-31 15:59:48.376102",NULL,NULL
+"6","gvu346","hashed_password_example_123","gvu346@gmail.com","(02)003-8103","Tùng Nguyễn","ADMIN","ACTIVE","2024-09-17 21:39:46.760662",NULL,NULL
+"7","xhoang453","hashed_password_example_123","xhoang453@gmail.com","+84 66 1275938","Lâm Đức Bùi","USER","ACTIVE","2024-01-28 10:39:01.522864",NULL,NULL
+"8","aduong572","hashed_password_example_123","aduong572@gmail.com","+84-03-863 2486","Chị Nhật Trần","USER","ACTIVE","2025-06-05 00:59:55.993515",NULL,NULL
+"9","gle964","hashed_password_example_123","gle964@gmail.com","(02) 6800 0841","Quang Hoàng","ADMIN","ACTIVE","2025-06-02 11:49:42.46718",NULL,NULL
+"10","maijane867","hashed_password_example_123","maijane867@gmail.com","05 6079 5581","Chị Khoa Dương","USER","ACTIVE","2024-03-03 14:48:01.973306",NULL,NULL
+"11","johnhoang151","hashed_password_example_123","johnhoang151@gmail.com","+84 44 7060854","Quý ông Anh Vũ","USER","ACTIVE","2024-10-11 13:16:53.159811",NULL,NULL
+"12","vujohn358","hashed_password_example_123","vujohn358@gmail.com","+84-35-161960","Vi Lê","USER","ACTIVE","2024-06-30 20:46:04.003356",NULL,NULL
+"13","janenguyen678","hashed_password_example_123","janenguyen678@gmail.com","(01) 3913 7200","Khoa Dương","USER","ACTIVE","2024-06-09 11:41:03.399663",NULL,NULL
+"14","phamjohn149","hashed_password_example_123","phamjohn149@gmail.com","(06)464-0482","Bảo Hoàng Mai","ADMIN","ACTIVE","2024-09-18 12:15:43.793122",NULL,NULL
+"15","janehoang504","hashed_password_example_123","janehoang504@gmail.com","(04) 0167 1075","Bà Hương Trần","USER","ACTIVE","2024-01-17 16:02:37.902077",NULL,NULL
+"16","john39799","hashed_password_example_123","john39799@gmail.com","07 7054915","Hải Hải Đặng","ADMIN","ACTIVE","2025-09-23 17:46:21.688619",NULL,NULL
+"17","vduong954","hashed_password_example_123","vduong954@gmail.com","00 9779818","Tùng Bùi","USER","ACTIVE","2024-02-28 04:31:39.071671",NULL,NULL
+"18","johnmai774","hashed_password_example_123","johnmai774@gmail.com","07 0540623","Chi Bùi","USER","ACTIVE","2023-12-29 09:25:30.277107",NULL,NULL
+"19","qnguyen220","hashed_password_example_123","qnguyen220@gmail.com","+84 91 7261512","Chị Vi Lê","USER","ACTIVE","2024-10-15 23:08:40.646054",NULL,NULL
+"20","john76846","hashed_password_example_123","john76846@gmail.com","+84 66 7925704","Anh Phúc Dương","USER","ACTIVE","2025-11-29 02:12:08.743059",NULL,NULL
+"21","john07832","hashed_password_example_123","john07832@gmail.com","05 4537655","Tú Hoàng","USER","ACTIVE","2025-10-24 05:48:27.784913",NULL,NULL
+"22","janehoang400","hashed_password_example_123","janehoang400@gmail.com","(05)262-1457","Hải Văn Hoàng","USER","ACTIVE","2024-02-27 16:17:51.745118",NULL,NULL
+"23","jane81763","hashed_password_example_123","jane81763@gmail.com","+84 90 5206526","Hồng Nguyễn","ADMIN","ACTIVE","2025-04-06 06:57:02.467882",NULL,NULL
+"24","lejane870","hashed_password_example_123","lejane870@gmail.com","(06)837-2313","Phương Hải Dương","ADMIN","ACTIVE","2025-12-06 23:35:01.535825",NULL,NULL
+"25","jane43186","hashed_password_example_123","jane43186@gmail.com","(06)027-8202","Châu Xuân Trần","USER","ACTIVE","2025-10-07 11:39:07.148845",NULL,NULL
+"26","john65245","hashed_password_example_123","john65245@gmail.com","+84 72 3633250","Quý cô Nhật Phạm","USER","ACTIVE","2025-03-24 23:18:10.123955",NULL,NULL
+"27","john12207","hashed_password_example_123","john12207@gmail.com","+84-25-741 4638","Phương Quang Lê","USER","ACTIVE","2024-07-06 06:56:39.936799",NULL,NULL
+"28","lnguyen809","hashed_password_example_123","lnguyen809@gmail.com","+84-27-040178","Cô Bảo Đặng","USER","ACTIVE","2024-04-11 13:14:59.003462",NULL,NULL
+"29","ghoang833","hashed_password_example_123","ghoang833@gmail.com","(02)096-4924","Anh Tùng Phạm","USER","ACTIVE","2025-04-17 00:52:51.672622",NULL,NULL
+"30","maijohn743","hashed_password_example_123","maijohn743@gmail.com","04 8870 1767","Cô Ánh Lê","USER","ACTIVE","2024-05-19 12:19:27.08379",NULL,NULL
+"31","janebui786","hashed_password_example_123","janebui786@gmail.com","(04) 0253 3670","Lâm Bùi","USER","ACTIVE","2024-07-01 10:47:30.478256",NULL,NULL
+"32","maijohn785","hashed_password_example_123","maijohn785@gmail.com","00 4135673","Hà Thế Phạm","USER","ACTIVE","2024-12-04 03:56:09.725581",NULL,NULL
+"33","hoangjane343","hashed_password_example_123","hoangjane343@gmail.com","02 6184 0634","Nhật Hải Vũ","USER","ACTIVE","2025-10-20 20:33:21.113797",NULL,NULL
+"34","duongjohn585","hashed_password_example_123","duongjohn585@gmail.com","+84-08-196 9841","Quý cô Lan Bùi","ADMIN","ACTIVE","2024-05-02 04:32:06.333022",NULL,NULL
+"35","john42692","hashed_password_example_123","john42692@gmail.com","03 2591079","Dũng Trần","USER","ACTIVE","2024-08-08 08:18:09.784956",NULL,NULL
+"36","maijohn681","hashed_password_example_123","maijohn681@gmail.com","02 7284 8176","Bảo Hoàng","USER","ACTIVE","2024-03-06 17:44:20.439271",NULL,NULL
+"37","johnhoang200","hashed_password_example_123","johnhoang200@gmail.com","04 5062434","Chị Lan Lê","USER","ACTIVE","2025-04-27 19:12:25.801598",NULL,NULL
+"38","janevu539","hashed_password_example_123","janevu539@gmail.com","04 9192664","Khoa Dương","USER","ACTIVE","2025-12-20 07:48:42.317153",NULL,NULL
+"39","buijohn947","hashed_password_example_123","buijohn947@gmail.com","+84-16-970 7474","Bác Bảo Lê","USER","ACTIVE","2024-01-29 17:11:08.542211",NULL,NULL
+"40","odang544","hashed_password_example_123","odang544@gmail.com","+84-97-838 5407","Quý cô Dương Trần","USER","ACTIVE","2025-01-26 10:23:00.239609",NULL,NULL
+"41","john47317","hashed_password_example_123","john47317@gmail.com","(09)519-7511","Dũng Phạm","USER","ACTIVE","2024-08-10 22:06:54.088933",NULL,NULL
+"42","janebui900","hashed_password_example_123","janebui900@gmail.com","(02)325-0341","Tú Nguyễn","USER","ACTIVE","2025-02-21 18:17:34.046327",NULL,NULL
+"43","jane73154","hashed_password_example_123","jane73154@gmail.com","+84-38-241431","Chị Bảo Bùi","USER","ACTIVE","2025-02-01 05:42:22.178178",NULL,NULL
+"44","sbui295","hashed_password_example_123","sbui295@gmail.com","+84 49 6592956","Cô Phương Bùi","USER","ACTIVE","2025-08-26 13:10:27.642769",NULL,NULL
+"45","duongjane552","hashed_password_example_123","duongjane552@gmail.com","08 3248 0721","Linh Mai","USER","ACTIVE","2024-12-08 00:45:09.274344",NULL,NULL
+"46","johnmai836","hashed_password_example_123","johnmai836@gmail.com","04 4176225","Hồng Nguyễn","USER","ACTIVE","2025-05-11 23:27:26.967024",NULL,NULL
+"47","john74780","$2a$10$2GLL0Ixl0CJSjJx0lmExPO4.MTIJ6N4gXrvn7CKNPQyNDmmV8uzNC","john74780@gmail.com","+84-80-401078","Nam Lê","USER","ACTIVE","2024-07-16 23:24:04.110984",NULL,NULL
+"48","johnbui530","$2a$10$2GLL0Ixl0CJSjJx0lmExPO4.MTIJ6N4gXrvn7CKNPQyNDmmV8uzNC","johnbui530@gmail.com","+84-41-855304","Quý ông Tú Trần","USER","ACTIVE","2025-10-26 11:03:07.353776",NULL,NULL
+"49","tien21","$2a$10$2GLL0Ixl0CJSjJx0lmExPO4.MTIJ6N4gXrvn7CKNPQyNDmmV8uzNC","janemai197@gmail.com","02 7434963","Bảo Trí Lê","USER","ACTIVE","2024-12-24 01:16:22.445004","2025-12-31 17:36:16.43294","2025-12-31 17:36:16.397304"
+"50","tester1","$2a$10$VOxRvlvO0cyG/dMB.InkX.NNX2IqrnLbWWaQ9wBlpw5zoreNBjbPm","john11245@gmail.com","03 9876 6522","Nhiên Trần","USER","ACTIVE","2025-03-31 23:47:36.542639","2025-12-30 03:18:02.70042","2025-12-30 03:18:02.644639"
+"51","vanlinh","$2a$10$VOxRvlvO0cyG/dMB.InkX.NNX2IqrnLbWWaQ9wBlpw5zoreNBjbPm","vanlinh30122003@gmail.com","0365556145","Vũ Văn Linh","USER","ACTIVE","2025-12-21 18:02:15.466392","2025-12-30 23:33:05.940249","2025-12-30 23:33:05.930249"
