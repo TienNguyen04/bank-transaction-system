@@ -60,6 +60,8 @@ public class Accounts {
             name = "updated_at"
     )
     private LocalDateTime updatedAt;
+    @Column(name ="term")
+    private String term;
 
     public Long getId() {
         return this.id;
@@ -95,6 +97,13 @@ public class Accounts {
 
     public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
+    }
+    public String getTerm() {
+        return this.term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
     }
 
     public void setId(final Long id) {

@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class TransactionController {

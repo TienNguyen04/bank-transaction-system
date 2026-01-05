@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.transaction_service.config.UserContext;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -110,24 +111,29 @@ public class TransactionService {
         return account.getBalance();
     }
 
-//    public java.util.List<Transaction> getMyTransactionHistory() {
-//        // 1. Lấy tên người đang đăng nhập từ Token
-//        String currentUsername = UserContext.getUsername();
-//        if (currentUsername == null || currentUsername.isEmpty()) {
-//            throw new RuntimeException("Bạn chưa đăng nhập!");
-//        }
-//
-//        // 2. Tìm Account của người này
-//        Account myAccount = accountRepository.findAccountByUsername(currentUsername)
-//                .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản của user: " + currentUsername));
-//
-//        // 3. Gọi Repository để lấy lịch sử
-//        // Truyền myAccount vào cả 2 vị trí (tìm xem mình là người gửi HOẶC mình là người nhận)
-//        return transactionRepository.findByFromAccountOrToAccountOrderByIdDesc(myAccount, myAccount);
-//    }
-    public List<Transaction> getMyTransactionHistory(Long userId) {
+    public List<Transaction> getMyTransactionHistory() {
+        // 1. Lấy tên người đang đăng nhập từ Token
+        String currentUsername = UserContext.getUsername();
+        if (currentUsername == null || currentUsername.isEmpty()) {
+            throw new RuntimeException("Bạn chưa đăng nhập!");
+        }
 
+        // 2. Tìm Account của người này
+        Account myAccount = accountRepository.findAccountByUsername(currentUsername)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản của user: " + currentUsername));
+
+        // 3. Gọi Repository để lấy lịch sử
+        // Truyền myAccount vào cả 2 vị trí (tìm xem mình là người gửi HOẶC mình là người nhận)
+        List<Transaction> list1 = transactionRepository.findByFromAccountNumber(myAccount.getAccountNumber());
+        List<Transaction> list2 = transactionRepository.findByToAccountNumber(myAccount.getAccountNumber());
+        List<Transaction> list3 = new ArrayList<Transaction>();
+        list3.addAll(list1);
+        list3.addAll(list2);
+        return list3;
     }
+//    public List<Transaction> getMyTransactionHistory(Long userId) {
+//
+//    }
     public Account getMyAccountInfo() {
         // 1. Lấy user từ Token/Context
         String currentUsername = UserContext.getUsername();

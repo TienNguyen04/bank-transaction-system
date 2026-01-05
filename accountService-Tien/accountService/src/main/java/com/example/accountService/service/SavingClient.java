@@ -35,8 +35,13 @@ public class SavingClient {
 
         // 4️⃣ Call
         restTemplate.postForEntity(
-                savingServiceUrl + "/saving/closesaving",
+                savingServiceUrl + "/private/closesaving",
                 entity,
+                Void.class
+        );
+        restTemplate.getForEntity(
+                savingServiceUrl+"/public/test",
+
                 Void.class
         );
     }

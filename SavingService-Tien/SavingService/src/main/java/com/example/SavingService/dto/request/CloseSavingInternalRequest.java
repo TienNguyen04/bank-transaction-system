@@ -1,4 +1,4 @@
-package com.example.SavingService.dto;
+package com.example.SavingService.dto.request;
 
 public class CloseSavingInternalRequest {
 

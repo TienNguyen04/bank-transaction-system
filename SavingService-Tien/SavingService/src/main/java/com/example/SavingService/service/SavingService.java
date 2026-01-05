@@ -1,6 +1,7 @@
 package com.example.SavingService.service;
 
-import com.example.SavingService.dto.AddBalanceRequest;
+import com.example.SavingService.dto.response.APIRes;
+import com.example.SavingService.dto.request.OpenSavingRequest;
 import com.example.SavingService.enity.Accounts;
 import com.example.SavingService.repository.SavingRepository;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class SavingService {
@@ -35,6 +38,54 @@ public class SavingService {
         }
         return account1.getAccountNumber();
     }
+    public APIRes<OpenSavingRequest> openSaving (int userid, BigDecimal balance, String term) {
+        List<Accounts> account0 = savingRepository.findByUserId(userid);
+        Accounts account1 = new Accounts();
+        Accounts account2 = new Accounts();
+        for(Accounts account: account0){
+            if(account.getAccountType().equals("payment")){
+                account1 = account;
+            }
+        }
+        if(balance.compareTo(account1.getBalance())>0){
+//            return new APIRes<OpenSavingRequest>(
+//                    "fail","Số dư tài khoản hiện không đủ",
+//
+//            )
+            throw new RuntimeException("Số dư tài khoản hiện không đủ");
+        }
+        else {
+            BigDecimal newBalance = account1.getBalance().subtract(balance);
+            account1.setBalance(newBalance);
+        }
+
+        account2.setUserId(userid);
+        account2.setBalance(balance);
+        account2.setCurrency("VND");
+        account2.setAccountType("saving");
+        account2.setCreatedAt(LocalDateTime.now());
+        account2.setAccountNumber(generate());
+        account2.setTerm(term);
+        savingRepository.save(account2);
+        OpenSavingRequest openSavingRequest = new OpenSavingRequest();
+        openSavingRequest.setAccountNumber(account2.getAccountNumber());
+        openSavingRequest.setBalance(balance);
+        openSavingRequest.setTerm(term);
+        return new APIRes<>(
+                "200 OK",
+                openSavingRequest
+        );
+    }
+
+        public static String generate() {
+            String time = LocalDateTime.now()
+                    .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+            int random = ThreadLocalRandom.current().nextInt(100, 999);
+
+            return time + random;
+        }
+
 
     @Transactional
     public void closeSaving(int userId, String savingAccountNumber) {
@@ -58,15 +109,18 @@ public class SavingService {
 
         savingRepository.save(saving);
 
-        // 🔁 Cộng tiền về tài khoản thanh toán
-        restTemplate.postForEntity(
-                "http://account-service/account/internal/add-balance",
-                new AddBalanceRequest(
-                        getPaymentAccountNumber(userId),
-                        saving.getBalance()
-                ),
-                Void.class
-        );
+        Accounts paymentaccount = savingRepository.findAccountsByUserIdAndAccountType(userId,"payment");
+        paymentaccount.setBalance(paymentaccount.getBalance().add(saving.getBalance()));
+//        // 🔁 Cộng tiền về tài khoản thanh toán
+//        restTemplate.postForEntity(
+//                "http://account-service/account/internal/add-balance",
+//                new OpenSavingRequest(
+//                        getPaymentAccountNumber(userId),
+//                        saving.getBalance(),
+//                        saving.getTerm()
+//                ),
+//                Void.class
+//        );
     }
 }
 

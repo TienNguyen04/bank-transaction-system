@@ -10,4 +10,6 @@ public interface SavingRepository extends JpaRepository<Accounts, Long> {
 
     Optional<Accounts> findByAccountNumber(String accountNumber);
     List<Accounts> findByUserId(int userId);
+    Accounts findAccountsByAccountType(String accountType);
+    Accounts findAccountsByUserIdAndAccountType(int userId, String accountType );
 }
