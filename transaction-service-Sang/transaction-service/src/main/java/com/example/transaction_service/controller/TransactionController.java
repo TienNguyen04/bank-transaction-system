@@ -20,8 +20,8 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @PostMapping
-    public ResponseEntity<?> createTransaction(@Valid @RequestBody TransactionRequest request) {
+    @PostMapping("/chuyentien")
+    public ResponseEntity<?> createTransaction(@RequestBody TransactionRequest request) {
         try {
             return ResponseEntity.ok(transactionService.createTransaction(request));
         } catch (Exception e) {

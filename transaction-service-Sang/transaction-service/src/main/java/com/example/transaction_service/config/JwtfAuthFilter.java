@@ -1,4 +1,4 @@
-package com.example.accountService.config;
+package com.example.transaction_service.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.util.List;
 
 @Component
-public class JwtAuthFilter extends OncePerRequestFilter {
+public class JwtfAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;

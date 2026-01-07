@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
 function goLogin() {
     window.location.href = "login.html"; 
 }
+function requireAuth() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "login.html";
+  }
+}
 
 // Cuộn xuống dịch vụ
 function scrollToServices() {

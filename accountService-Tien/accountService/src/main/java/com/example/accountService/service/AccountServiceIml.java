@@ -1,5 +1,5 @@
 package com.example.accountService.service;
-import com.example.accountService.dto.request.CreateSavingAccReq;
+import com.example.accountService.dto.request.OpenSavingAccReq;
 import com.example.accountService.dto.response.AccountRes;
 import com.example.accountService.model.Accounts;
 import jakarta.transaction.Transactional;
@@ -28,10 +28,10 @@ public class AccountServiceIml implements AccountService {
         return account.getBalance();
     }
     @Override
-    public AccountRes createAccount(int userID, CreateSavingAccReq accReq) {
+    public AccountRes createAccount(int userID, OpenSavingAccReq accReq) {
         Accounts account = new Accounts();
         account.setUserId(userID);
-        account.setAccountType(accReq.getAccountType());
+        account.setAccountType("SAVING");
         account.setStatus("ACTIVE");
         while (accountRepository.existsByAccountNumber(account.getAccountNumber())){
             account.setAccountNumber(generateAccountNumber());
@@ -62,7 +62,7 @@ public class AccountServiceIml implements AccountService {
         );
     }
     @Override
-    public List<AccountRes> getAccountList(long userId) {
+    public List<AccountRes> getAccountList(int userId) {
 
         List<AccountRes> accountsList = new ArrayList<>();
 
@@ -87,6 +87,17 @@ public class AccountServiceIml implements AccountService {
         long number = 100000000000L +
                 (Math.abs(random.nextLong()) % 900000000000L);
         return String.valueOf(number);
+    }
+    public String getAccountName(String accountNumber) {
+        // 1. In ra xem nhận được số tài khoản gì (Kiểm tra thừa khoảng trắng)
+        System.out.println("DEBUG: Đang tìm STK = [" + accountNumber + "]");
+
+        String fullName = accountRepository.findUserNameByAccountNumber(accountNumber.trim());
+        if (fullName == null) {
+            throw new RuntimeException("Tài khoản không tồn tại hoặc chưa có tên chủ sở hữu");
+        }
+        System.out.println("DEBUG: Đã tìm thấy tên: " + fullName);
+        return fullName;
     }
 
 }

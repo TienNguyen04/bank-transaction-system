@@ -19,6 +19,9 @@
         <a href="transfer.html">Chuyển khoản</a>
         <a href="notification.html">Thông báo</a>
         <a href="history.html" class="active" style="color: #0056d6;">Lịch sử giao dịch</a>
+        <a href="profile.html">Profile</a>
+        <a href="account_list.html">Danh sách tài khoản</a>
+        <a href="#" onclick="logout()">Đăng xuất</a>
     </nav>
 
     <div class="user-box">
@@ -47,7 +50,7 @@
             <option>7 ngày gần đây</option>
         </select>
 
-        <button onclick="loadHistory()" style="padding: 0 15px; background: #0056d6; color: white; border: none; border-radius: 8px; cursor: pointer;">Tải lại</button>
+        <button onclick="loadData()" style="padding: 0 15px; background: #0056d6; color: white; border: none; border-radius: 8px; cursor: pointer;">Tải lại</button>
     </div>
 
     <table class="history-table">

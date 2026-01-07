@@ -4,12 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuyển khoản - Banking System</title>
+
     <link rel="stylesheet" href="css/transfer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .msg-error {
+            color: red;
+            font-size: 0.85em;
+            display: none;
+            margin-top: 5px;
+        }
+        .input-loading {
+            background-color: #f9f9f9;
+            cursor: wait;
+            color: #888;
+        }
+        /* Style riêng cho phần hiển thị số dư */
+        .balance-info {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #0056d6;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .balance-info i {
+            color: #28a745; /* Icon màu xanh lá */
+        }
+        
+        /* Chỉnh lại chút input readonly cho đẹp */
+        input[readonly] {
+            background-color: #e9ecef;
+            color: #495057;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ================= HEADER ================= -->
+
 <header class="header">
     <div class="logo">Banking System</div>
 
@@ -17,8 +52,9 @@
         <a href="home.html">Trang chủ</a>
         <a href="transfer.html">Chuyển khoản</a>
         <a href="notification.html">Thông báo</a>
-        <a href="history.html">Lịch sử giao dịch</a>
-        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+        <a href="history.html" class="active" style="color: #0056d6;">Lịch sử giao dịch</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Đăng xuất</a>
     </nav>
 
     <div class="user-box">
@@ -26,92 +62,80 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
             <div class="dropdown-content">
-                <a href="profile.html">Thông tin người dùng</a>
-                <a href="index.html">Đăng xuất</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
             </div>
         </div>
     </div>
 </header>
 
-    <!-- ===== MAIN TRANSFER FORM ===== -->
-    <section class="transfer-container">
-        <h2>Chuyển khoản</h2>
+<section class="transfer-container">
+    <h2><i class="fas fa-exchange-alt"></i> Chuyển khoản</h2>
 
-        <form class="transfer-form">
+    <form class="transfer-form" id="transferForm">
 
-            <!-- Tài khoản nguồn -->
-            <label>Tài khoản nguồn:</label>
-            <div class="source-account">
-                <select id="sourceAcc">
-                    <option value="0123456789" data-balance="12000000">0123456789</option>
-                    <option value="0987654321" data-balance="5000000">0987654321</option>
-                </select>
-                <div class="balance" id="sourceBalance">12,000,000 VND</div>
+        <label>Tài khoản nguồn (Của bạn):</label>
+        <div class="source-account-group">
+            <input
+                    type="text"
+                    id="sourceAcc" 
+                    readonly>
+            <div class="balance-info">
+                <i class="fas fa-wallet"></i> 
+                <span type ="number"id="sourceBalance"></span>
             </div>
-
-            <!-- Ngân hàng nhận -->
-            <label>Ngân hàng nhận:</label>
-            <select id="bankReceiver">
-                <option value="">Chọn ngân hàng ▼</option>
-                <option>Ngân hàng A</option>
-                <option>Ngân hàng B</option>
-                <option>Ngân hàng C</option>
-            </select>
-
-            <!-- Số tài khoản nhận -->
-            <label>Số tài khoản nhận:</label>
-            <input type="text" id="receiverAcc" placeholder="0987654321">
-
-            <!-- Tên người nhận -->
-            <label>Tên người nhận:</label>
-            <input type="text" id="receiverName" placeholder="Nguyễn Văn B" readonly>
-
-            <!-- Số tiền -->
-            <label>Số tiền:</label>
-            <input type="number" id="amount" placeholder="Nhập số tiền">
-
-            <!-- Nội dung -->
-            <label>Nội dung:</label>
-            <input type="text" id="note" placeholder="Nội dung chuyển tiền">
-
-            <!-- Phí giao dịch -->
-            <label>Phí giao dịch:</label>
-            <div class="fee" id="fee">0đ</div>
-
-            <!-- Nút xác nhận -->
-            <button type="submit" class="confirm-btn">Xác nhận</button>
-        </form>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
-    <footer id="footer">
-        <div class="footer-container">
-
-            <div class="footer-section">
-                <h3>Giới thiệu</h3>
-                <p>Ngân hàng số an toàn – bảo mật – tiện lợi.</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Liên hệ</h3>
-                <p>📞 1900 1234</p>
-                <p>📧 support@banking.com</p>
-                <p>📍 123 Trần Phú, Hà Nội</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Chính sách</h3>
-                <a href="#">Bảo mật</a><br>
-                <a href="#">Điều khoản</a><br>
-                <a href="#">Hướng dẫn</a>
-            </div>
-
         </div>
 
-        <p class="copyright">© 2025 Banking System</p>
-    </footer>
+        <label style="margin-top: 15px;">Ngân hàng nhận:</label>
+        <select id="bankReceiver">
+            <option value="INTERNAL">Nội bộ (Banking System)</option>
+            <option value="BANK_A">Ngân hàng A (Liên kết)</option>
+            <option value="BANK_B">Ngân hàng B (Liên kết)</option>
+        </select>
 
-    <script src="js/transfer.js"></script>
-    <script src="js/main.js"></script>
+        <label>Số tài khoản nhận:</label>
+        <input type="text" id="receiverAcc" onblur="loadReciveAccount()" placeholder="Nhập số tài khoản người nhận" required autocomplete="off">
+        <span id="msgError" class="msg-error"></span>
+
+        <label>Tên người nhận:</label>
+        <input type="text" id="receiverName" readonly>
+
+        <label>Số tiền (VND):</label>
+        <input type="number" id="amount" placeholder="Nhập số tiền cần chuyển" required min="10000">
+
+        <label>Nội dung:</label>
+        <input type="text" id="note" placeholder="Nội dung chuyển tiền (Không dấu)">
+
+        <label>Phí giao dịch:</label>
+        <div class="fee" id="fee" style="color: green; font-weight: bold;">Miễn phí</div>
+
+        <button type="submit" class="confirm-btn">
+            <i class="fas fa-paper-plane"></i> Xác nhận chuyển tiền
+        </button>
+    </form>
+</section>
+
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Về chúng tôi</h3>
+            <p>Hệ thống Banking System hỗ trợ giao dịch ngân hàng trực tuyến an toàn, bảo mật và nhanh chóng.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>📞 Hotline: 1900 1234</p>
+            <p>📧 Email: support@bankingsystem.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <p><a href="#">Bảo mật thông tin</a></p>
+            <p><a href="#">Điều khoản sử dụng</a></p>
+        </div>
+    </div>
+    <p class="copyright">© 2025 Banking System - All Rights Reserved.</p>
+</footer>
+
+<!-- <script src="js/main.js"></script>  -->
+<script src="js/transfer.js"></script>
+
 </body>
 </html>

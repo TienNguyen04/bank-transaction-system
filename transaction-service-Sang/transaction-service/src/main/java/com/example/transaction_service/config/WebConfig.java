@@ -12,17 +12,27 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private UserInterceptor userInterceptor;
 
-    // 1. CẤU HÌNH CORS (Bắt buộc phải có để Frontend gọi được)
+     //1. CẤU HÌNH CORS (Bắt buộc phải có để Frontend gọi được)
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")
+//
+//                .allowedOrigins("http://127.0.0.1:5500") // Thay đúng cổng Frontend hộ bạn
 //                .allowedOriginPatterns("*")
-//                //.allowedOrigins("http://localhost:8082") // Thay đúng cổng Frontend hộ bạn
-//                // Hoặc dùng .allowedOriginPatterns("*") nếu muốn mở hết
 //                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 //                .allowedHeaders("*") // Cho phép gửi Token (Authorization)
 //                .allowCredentials(true);
 //    }
+//     @Override
+//     public void addCorsMappings(CorsRegistry registry) {
+//         registry.addMapping("/**")
+//                 //.allowedOrigins("http://localhost:8082", "http://127.0.0.1:5500") // Chỉ định rõ origin
+//                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                 .allowedOriginPatterns("*")
+//                 .allowedHeaders("*")
+//                 .allowCredentials(true)
+//                 .maxAge(3600); // Cache preflight request trong 1 giờ
+//     }
 
     // 2. ĐĂNG KÝ INTERCEPTOR (Để chặn và đọc Token)
     @Override

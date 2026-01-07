@@ -113,17 +113,18 @@
 
         <form class="saving-form">
             <label>Số tài khoản nguồn</label>
-            <input type="text" value="790932459838" readonly>
+            <input type="text" ID="sourceAccount" readonly>
 
             <label>Số tiền gửi</label>
-            <input type="number" required>
+            <input type="number" required id="savingAmount">
 
             <label>Kỳ hạn</label>
-            <select>
-                <option>1 tháng</option>
-                <option>3 tháng</option>
-                <option>6 tháng</option>
-                <option>12 tháng</option>
+            <select id="savingTerm">
+                <option value="1">1 tháng</option>
+                <option value="3">3 tháng</option>
+                <option value="6">6 tháng</option>
+                <option value="12">12 tháng</option>
+                <option value="24">12 tháng</option>
             </select>
 
             <label>Hình thức nhận lãi</label>
@@ -179,7 +180,7 @@
         <input type="number" id="settleAmountInput" readonly>
 
         <div class="action-center">
-            <button type="button" class="btn primary" id="btnSettleSaving">
+            <button type="button" class="btn primary" id="btnSettleSaving" onclick="handleSavingSettlement()">
                 Xác nhận
             </button>
             <button class="btn secondary" onclick="backToList()">Hủy</button>

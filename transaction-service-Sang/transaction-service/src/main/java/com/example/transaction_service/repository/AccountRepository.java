@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-
+    //Optional<Account> findByUserIAndAccountType(int userId,String accountType);
     Optional<Account> findByAccountNumber(String accountNumber);
     // Tìm tài khoản bằng Số tài khoản (String) và KHÓA dòng đó lại
     @Query(value = "SELECT * FROM account_service.accounts WHERE account_number = :accountNumber FOR UPDATE", nativeQuery = true)
@@ -30,4 +30,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
         WHERE a.account_number = :accountNumber
     """, nativeQuery = true)
     String findUserNameByAccountNumber(@Param("accountNumber") String accountNumber);
+
+    Account findByUserIdAndAccountType(int userId,String accountType);
 }

@@ -11,6 +11,7 @@
 <body>
 
 <!-- ================= HEADER ================= -->
+
 <header class="header">
     <div class="logo">Banking System</div>
 
@@ -18,8 +19,9 @@
         <a href="home.html">Trang chủ</a>
         <a href="transfer.html">Chuyển khoản</a>
         <a href="notification.html">Thông báo</a>
-        <a href="history.html">Lịch sử giao dịch</a>
-        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+        <a href="history.html" class="active" style="color: #0056d6;">Lịch sử giao dịch</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Đăng xuất</a>
     </nav>
 
     <div class="user-box">
@@ -27,8 +29,7 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
             <div class="dropdown-content">
-                <a href="profile.html">Thông tin người dùng</a>
-                <a href="index.html">Đăng xuất</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
             </div>
         </div>
     </div>

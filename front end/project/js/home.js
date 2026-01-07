@@ -3,21 +3,68 @@
 // =========================
 
 const toggleBtn = document.getElementById("toggleMoney");
-const balanceText = document.getElementById("balance");
-const account_url ="http://localhost:8080/accountService/account"
+//const balanceText = document.getElementById("balance");
+const account_url ="http://localhost:8080/accountService/account";
+const accountlist_api ="http://localhost:8080/accountService/account/my-accounts";
+const token = localStorage.getItem("token");
+// if (toggleBtn && balanceText) {
+//     toggleBtn.addEventListener("click", () => {
+//         const isBlur = balanceText.classList.toggle("blurred");
 
-if (toggleBtn && balanceText) {
-    toggleBtn.addEventListener("click", () => {
-        const isBlur = balanceText.classList.toggle("blurred");
+//         if (isBlur) {
+//             toggleBtn.classList.replace("fa-eye-slash", "fa-eye");
+//         } else {
+//             toggleBtn.classList.replace("fa-eye", "fa-eye-slash");
+//         }
+//     });
+// }
+async function loadUsser() {
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
 
-        if (isBlur) {
-            toggleBtn.classList.replace("fa-eye-slash", "fa-eye");
-        } else {
-            toggleBtn.classList.replace("fa-eye", "fa-eye-slash");
+    const res = await fetch(accountlist_api, {
+        headers: {
+            "Authorization": "Bearer " + token
         }
     });
-}
+    
+    if (res.status === 401 || res.status === 403) {
+        alert("Phiên đăng nhập hết hạn");
+        localStorage.clear();
+        window.location.href = "login.html";
+        return;
+    }
 
+    let accounts = await res.json();
+    const paymentAccounts = accounts.filter(acc =>
+        acc.status === "ACTIVE" &&
+        acc.accountType === "PAYMENT"
+    );
+    if (paymentAccounts.length === 0) {
+        select.innerHTML = `<option value="">Không có tài khoản thanh toán</option>`;
+        return;
+    }
+    const paymentAccount = paymentAccounts[0];
+    const res1 = await fetch (
+            `http://localhost:8080/accountService/account/check-name/${paymentAccount.accountNumber}`,
+            {
+                method:"GET",
+                headers: 
+                {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            },
+            }
+            
+        )
+    const paymentAcc = await res1.json();
+    document.getElementById("usernameBig").innerText=paymentAcc.fullName;
+    document.getElementById("accNumber").innerText=paymentAccount.accountNumber;
+    document.getElementById("balance").innerText=paymentAccount.balance;
+    
+}
 // =========================
 // CHUYỂN TRANG
 // =========================
@@ -55,7 +102,7 @@ function logout() {
 // =========================
 window.addEventListener("DOMContentLoaded", () => {
     const role = localStorage.getItem("role");
-
+    loadUsser();
     if (role !== "admin") {
         document.querySelectorAll(".admin-only").forEach(item => {
             item.style.display = "none";

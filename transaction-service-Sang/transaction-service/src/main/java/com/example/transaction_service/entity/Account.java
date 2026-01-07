@@ -19,4 +19,6 @@ public class Account {
     private int userId;
 
     private BigDecimal balance;
+    @Column(name="account_type")
+    private String accountType;
 }

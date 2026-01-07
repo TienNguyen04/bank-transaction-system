@@ -5,9 +5,13 @@ import com.example.SavingService.dto.request.CloseSavingInternalRequest;
 import com.example.SavingService.dto.request.CreateNotificationRequest;
 import com.example.SavingService.dto.request.OpenSavingRequest;
 import com.example.SavingService.service.SavingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.client.RestTemplate;
+import com.example.SavingService.config.RestConfig;
 import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -15,9 +19,12 @@ import org.springframework.web.client.RestTemplate;
 public class SavingPrivateController {
 
     private final SavingService savingService;
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public SavingPrivateController(SavingService savingService) {
+    public SavingPrivateController(SavingService savingService, RestTemplate restTemplate) {
         this.savingService = savingService;
+        this.restTemplate = restTemplate;
     }
     @PostMapping("/opensaving")
     public APIRes<OpenSavingRequest> openSaving(
@@ -31,17 +38,6 @@ public class SavingPrivateController {
             @RequestBody CloseSavingInternalRequest req
     ) {
         savingService.closeSaving(userId, req.getSavingAccountNumber());
-        RestTemplate restTemplate = null;
-        restTemplate.postForEntity(
-                "http://localhost:8084/noti-Nguyet/private/create",
-                new CreateNotificationRequest(
-                        userId,
-                        "Tất toán sổ tiết kiệm",
-                        req.getSavingAccountNumber(),
-                        "Sổ tiết kiệm đã được tất toán thành công"
-                ),
-                Void.class
-        );
 
         return ResponseEntity.ok("Close saving success");
     }

@@ -5,15 +5,22 @@ document.addEventListener("DOMContentLoaded", () => {
     bindClick("#lockSection .btn.danger", handleLockAccount);
     bindSubmit(".saving-form", handleSavingSubmit);
     bindClick("#transferInternalSection .btn.primary", handleSavingSettlement);
+
+    // Load danh sách ngay khi vào trang
+    loadAccounts();
 });
-const accountlist_api ="http://localhost:8080/accountService/account/my-accounts";
-const lockaccount_api ="http://localhost:8080/accountService/account/my-accounts"
-const opensaving_api ="http://localhost:8082/savingService/account/opensaving"
-const closesaving_api ="http://localhost:8082/savingService/account/closesaving"
 
-let accounts = [];
+// =================== CONFIG & VARIABLES ===================
+const API_BASE = "http://localhost:8080/accountService/account";
+const accountlist_api = `${API_BASE}/my-accounts`;
+const opensaving_api = `${API_BASE}/opensaving`;
+const closesaving_api = `${API_BASE}/closesaving`;
+// API khóa tài khoản (Cần kiểm tra lại endpoint backend của bạn)
+const lockaccount_api = `${API_BASE}/lock`; 
 
+let accounts = []; // Biến toàn cục lưu danh sách
 
+// =================== LOAD ACCOUNTS ===================
 async function loadAccounts() {
     const token = localStorage.getItem("token");
 
@@ -22,24 +29,26 @@ async function loadAccounts() {
         return;
     }
 
-    const res = await fetch(accountlist_api, {
-        headers: {
-            "Authorization": "Bearer " + token
+    try {
+        const res = await fetch(accountlist_api, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (res.status === 401 || res.status === 403) {
+            alert("Phiên đăng nhập hết hạn");
+            localStorage.clear();
+            window.location.href = "login.html";
+            return;
         }
-    });
 
-    if (res.status === 401 || res.status === 403) {
-        alert("Phiên đăng nhập hết hạn");
-        localStorage.clear();
-        window.location.href = "login.html";
-        return;
+        accounts = await res.json();
+        renderAccountTable(accounts);
+    } catch (err) {
+        console.error("Lỗi tải danh sách:", err);
     }
-
-    accounts = await res.json();
-    renderAccountTable(accounts);
 }
-
-document.addEventListener("DOMContentLoaded", loadAccounts);
 
 function renderAccountTable(accounts) {
     const tbody = document.getElementById("accountTableBody");
@@ -48,19 +57,14 @@ function renderAccountTable(accounts) {
     if (!accounts || accounts.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align:center">
-                    Không có tài khoản nào
-                </td>
-            </tr>
-        `;
+                <td colspan="6" style="text-align:center">Không có tài khoản nào</td>
+            </tr>`;
         return;
     }
 
     accounts.forEach(acc => {
         const tr = document.createElement("tr");
-
-        const canSettle =
-            acc.status === "ACTIVE" && acc.accountType === "SAVING";
+        const canSettle = acc.status === "ACTIVE" && acc.accountType === "SAVING";
 
         tr.innerHTML = `
             <td>${acc.accountNumber}</td>
@@ -79,205 +83,145 @@ function renderAccountTable(accounts) {
                     : '-'}
             </td>
         `;
-
         tbody.appendChild(tr);
     });
 }
 
-
-//MODAL TẤT TOÁN
+// =================== MODAL & RENDER HELPER ===================
 let selectedSavingAccount = null;
 
 function openSettleModal(accountNumber, balance) {
     selectedSavingAccount = accountNumber;
-
-    // Ẩn modal khác TRƯỚC
     hideAllModals();
 
-    // Set dữ liệu
-    document.getElementById("savingAccountInput").value = accountNumber;
-    document.getElementById("settleAmountInput").value = balance;
+    // Set dữ liệu vào modal tất toán
+    const accInput = document.getElementById("savingAccountInput");
+    const amtInput = document.getElementById("settleAmountInput"); // Input hiển thị số dư hiện tại
+    
+    if(accInput) accInput.value = accountNumber;
+    if(amtInput) amtInput.value = balance; // Hoặc formatMoney(balance) tùy input type text/number
 
-    // Render payment account
+    // Render danh sách tài khoản nhận tiền (Payment)
     renderPaymentAccounts();
 
-    // Hiện modal
     document.getElementById("transferInternalSection").style.display = "flex";
 }
 
-//function lấy payment account
+// Hàm render dropdown tài khoản thanh toán + TRẢ VỀ DANH SÁCH
 function renderPaymentAccounts() {
-    const select = document.getElementById("receiverAccountSelect");
-    select.innerHTML = "";
+    const select = document.getElementById("receiverAccountSelect"); // Select box chọn tài khoản nhận
+    // Hoặc select box chọn tài khoản nguồn khi mở tiết kiệm
+    // Lưu ý: Code cũ của bạn dùng chung hàm này cho 2 modal khác nhau, cần cẩn thận ID
 
+    // Ở đây mình giả định bạn dùng chung logic lọc Payment Account
+    
+    // Lọc danh sách Payment
     const paymentAccounts = accounts.filter(acc =>
         acc.status === "ACTIVE" &&
         acc.accountType === "PAYMENT"
     );
 
-    if (paymentAccounts.length === 0) {
-        select.innerHTML = `<option value="">Không có tài khoản thanh toán</option>`;
-        return;
-    }
+    // Nếu đang ở modal Mở tiết kiệm, cần fill vào dropdown nguồn
+    const sourceSelect = document.getElementById("sourceAccount"); 
+    // Nếu đang ở modal Tất toán, fill vào dropdown nhận
+    const receiverSelect = document.getElementById("receiverAccountSelect");
 
-    paymentAccounts.forEach(acc => {
-        const option = document.createElement("option");
-        option.value = acc.accountNumber;
-        option.textContent = acc.accountNumber;
-        select.appendChild(option);
-    });
-}
+    // Helper render option
+    const renderOptions = (selElement) => {
+        if (!selElement) return;
+        selElement.innerHTML = "";
+        if (paymentAccounts.length === 0) {
+            selElement.innerHTML = `<option value="">Không có tài khoản thanh toán</option>`;
+        } else {
+            paymentAccounts.forEach(acc => {
+                const option = document.createElement("option");
+                option.value = acc.accountNumber;
+                option.textContent = `${acc.accountNumber} - ${formatMoney(acc.balance)}`;
+                selElement.appendChild(option);
+            });
+        }
+    };
 
-// =================== HELPER ===================
-function bindClick(selector, handler) {
-    const el = document.querySelector(selector);
-    if (el) el.addEventListener("click", handler);
-}
+    renderOptions(sourceSelect);
+    renderOptions(receiverSelect);
 
-function bindSubmit(selector, handler) {
-    const form = document.querySelector(selector);
-    if (form) form.addEventListener("submit", handler);
-}
-
-function getAmount(container) {
-    const input = container.querySelector("input[type='number']");
-    return Number(input?.value);
-}
-function mapAccountType(type) {
-    switch (type) {
-        case "PAYMENT": return "Thanh toán";
-        case "SAVING": return "Tiết kiệm";
-        default: return type;
-    }
-}
-
-function mapStatus(status) {
-    switch (status) {
-        case "ACTIVE": return "Hoạt động";
-        case "LOCKED": return "Đã khóa";
-        default: return status;
-    }
-}
-
-function formatMoney(amount) {
-    if (amount == null) return "0 VND";
-    return amount.toLocaleString("vi-VN") + " VND";
-}
-
-function formatDate(dateStr) {
-    if (!dateStr) return "-";
-    const d = new Date(dateStr);
-    return d.toLocaleDateString("vi-VN");
-}
-
-// =================== MODAL CONTROL ===================
-function hideAllModals() {
-    document.querySelectorAll(".modal-overlay").forEach(m => {
-        m.style.display = "none";
-    });
-}
-
-function showLock() {
-    hideAllModals();
-    document.getElementById("lockSection").style.display = "flex";
+    return paymentAccounts; // QUAN TRỌNG: Phải return để hàm showSaving dùng được
 }
 
 function showSaving() {
     hideAllModals();
     document.getElementById("savingSection").style.display = "flex";
-}
-
-function showTransferInternal() {
-    hideAllModals();
-    document.getElementById("transferInternalSection").style.display = "flex";
-}
-
-function backToList() {
-    hideAllModals();
-}
-
-// =================== MESSAGE OVERLAY ===================
-function showMessage(message, callback = null) {
-    // ⚠️ KHÔNG hide modal phía dưới
-    document.getElementById("messageText").innerText = message;
-    document.getElementById("messageOverlay").style.display = "flex";
-    window._messageCallback = callback;
-}
-
-function closeMessage() {
-    document.getElementById("messageOverlay").style.display = "none";
-    if (typeof window._messageCallback === "function") {
-        const cb = window._messageCallback;
-        window._messageCallback = null;
-        cb();
+    
+    // Gọi hàm render và lấy danh sách trả về
+    const paymentAccounts = renderPaymentAccounts();
+    
+    // Auto select tài khoản đầu tiên
+    if (paymentAccounts && paymentAccounts.length > 0) {
+        const paymentAcc = paymentAccounts[0];
+        const sourceInput = document.getElementById("sourceAccount");
+        // Nếu là thẻ select thì .value = accountNumber, nếu là input readonly thì .value = accountNumber
+        if(sourceInput) sourceInput.value = paymentAcc.accountNumber; 
     }
-}
-
-// =================== LOCK ACCOUNT ===================
-function handleLockAccount() {
-    const selected = document.querySelector("input[name='lockAccount']:checked");
-
-    if (!selected) {
-        showMessage("Vui lòng chọn tài khoản để khóa!");
-        return;
-    }
-
-    showMessage("Xác nhận khóa tài khoản này?", () => {
-        showMessage("Khóa tài khoản thành công! (demo)", backToList);
-    });
 }
 
 // =================== OPEN SAVING ACCOUNT ===================
-function handleSavingSubmit(e) {
+async function handleSavingSubmit(e) {
     e.preventDefault();
+    const token = localStorage.getItem("token"); // Lấy token lại
 
-    const amount = getAmount(e.target);
+    // Lấy GIÁ TRỊ từ input (Sửa lỗi .value)
+    const amountVal = parseFloat(document.getElementById("savingAmount").value);
+    const termVal = document.getElementById("savingTerm").value; 
+    const sourceAcc = document.getElementById("sourceAccount").value; // Tài khoản nguồn trừ tiền
 
-    // 🔴 NGHIỆP VỤ: MỞ SỔ ≥ 1 TRIỆU
-    if (isNaN(amount) || amount < 1_000_000) {
+    // Validate
+    if (isNaN(amountVal) || amountVal < 1000000) {
         showMessage("Số tiền mở sổ tiết kiệm tối thiểu là 1.000.000 VND!");
         return;
     }
 
-    showMessage("Mở tài khoản tiết kiệm thành công! (demo)", () => {
-        e.target.reset();
-        backToList();
-    });
+    try {
+        const res = await fetch(opensaving_api, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sourceAccountNumber: sourceAcc, // Cần gửi tài khoản nguồn để trừ tiền
+                balance: amountVal,             // Số tiền gửi
+                term: termVal                   // Kỳ hạn
+            })
+        });
+
+        if (!res.ok) {
+            const text = await res.text();
+            throw new Error(text || "Mở sổ thất bại");
+        }
+
+        showMessage("✅ Mở sổ tiết kiệm thành công", () => {
+            e.target.reset(); // Reset form
+            backToList();
+            loadAccounts();   // Reload danh sách
+        });
+
+    } catch (err) {
+        console.error(err);
+        showMessage("❌ Lỗi: " + err.message);
+    }
 }
 
-// =================== SETTLE SAVING ACCOUNT ===================
-// function handleSavingSettlement() {
-//     const section = document.getElementById("transferInternalSection");
-//     const amount = getAmount(section);
-
-//     // 🔴 NGHIỆP VỤ: TẤT TOÁN > 1 TRIỆU
-//     if (isNaN(amount) || amount <= 1_000_000) {
-//         showMessage("Số tiền tất toán phải lớn hơn 1.000.000 VND!");
-//         return;
-//     }
-
-//     showMessage("Xác nhận tất toán sổ tiết kiệm này?", () => {
-//         showMessage("Tất toán sổ tiết kiệm thành công! (demo)", () => {
-//             section.querySelector("input[type='number']").value = "";
-//             backToList();
-//         });
-//     });
-// }
+// =================== SETTLE SAVING ACCOUNT (TẤT TOÁN) ===================
 async function handleSavingSettlement() {
     if (!selectedSavingAccount) {
         showMessage("Không xác định được tài khoản tiết kiệm");
         return;
     }
 
-    const token = localStorage.getItem("token");
-    const amount = getAmount(
-        document.getElementById("transferInternalSection")
-    );
-
-    if (isNaN(amount) || amount <= 0) {
-        showMessage("Số tiền không hợp lệ");
-        return;
-    }
+    const token = localStorage.getItem("token"); // Lấy token lại
+    
+    // Lấy tài khoản nhận tiền (Payment) từ dropdown
+    const receiverAcc = document.getElementById("receiverAccountSelect")?.value;
 
     try {
         const res = await fetch(closesaving_api, {
@@ -287,18 +231,90 @@ async function handleSavingSettlement() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                savingAccountNumber: selectedSavingAccount
+                savingAccountNumber: selectedSavingAccount, // Tài khoản tiết kiệm cần đóng
+                toAccountNumber: receiverAcc                // Tài khoản nhận tiền về (nếu backend cần)
             })
         });
 
-        if (!res.ok) throw new Error("Tất toán thất bại");
+        if (!res.ok) {
+             const text = await res.text();
+             throw new Error(text || "Tất toán thất bại");
+        }
 
-        showMessage("Tất toán sổ tiết kiệm thành công", () => {
+        showMessage("✅ Tất toán sổ tiết kiệm thành công", () => {
             backToList();
-            loadAccounts(); // reload danh sách
+            loadAccounts(); 
         });
 
     } catch (err) {
-        showMessage("Lỗi khi tất toán sổ tiết kiệm");
+        showMessage("❌ Lỗi: " + err.message);
+    }
+}
+
+// =================== HELPERS & UI CONTROL ===================
+function hideAllModals() {
+    document.querySelectorAll(".modal-overlay").forEach(m => m.style.display = "none");
+}
+function backToList() { hideAllModals(); }
+
+function showLock() {
+    hideAllModals();
+    document.getElementById("lockSection").style.display = "flex";
+}
+function showTransferInternal() {
+    hideAllModals();
+    document.getElementById("transferInternalSection").style.display = "flex";
+}
+
+function handleLockAccount() {
+    // Demo logic
+    showMessage("Chức năng đang phát triển");
+}
+
+function bindClick(selector, handler) {
+    const el = document.querySelector(selector);
+    if (el) el.addEventListener("click", handler);
+}
+function bindSubmit(selector, handler) {
+    const form = document.querySelector(selector);
+    if (form) form.addEventListener("submit", handler);
+}
+function getAmount(container) {
+    const input = container.querySelector("input[type='number']");
+    return Number(input?.value);
+}
+function mapAccountType(type) {
+    return type === "PAYMENT" ? "Thanh toán" : (type === "SAVING" ? "Tiết kiệm" : type);
+}
+function mapStatus(status) {
+    return status === "ACTIVE" ? "Hoạt động" : (status === "LOCKED" ? "Đã khóa" : status);
+}
+function formatMoney(amount) {
+    return (amount || 0).toLocaleString("vi-VN") + " VND";
+}
+function formatDate(dateStr) {
+    if (!dateStr) return "-";
+    return new Date(dateStr).toLocaleDateString("vi-VN");
+}
+
+// MESSAGE OVERLAY
+function showMessage(message, callback = null) {
+    const msgText = document.getElementById("messageText");
+    const msgOverlay = document.getElementById("messageOverlay");
+    if(msgText && msgOverlay) {
+        msgText.innerText = message;
+        msgOverlay.style.display = "flex";
+        window._messageCallback = callback;
+    } else {
+        alert(message);
+        if(callback) callback();
+    }
+}
+function closeMessage() {
+    document.getElementById("messageOverlay").style.display = "none";
+    if (typeof window._messageCallback === "function") {
+        const cb = window._messageCallback;
+        window._messageCallback = null;
+        cb();
     }
 }

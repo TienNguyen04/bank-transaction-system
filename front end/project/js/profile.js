@@ -1,5 +1,5 @@
 // ====== CẤU HÌNH API ======
-const API_BASE_URL = 'http://localhost:8081/user-service/api';
+const API_BASE_URL = 'http://localhost:8081/user-service-Linh/api';
 
 // ====== BIẾN TOÀN CỤC ======
 let userData = null;

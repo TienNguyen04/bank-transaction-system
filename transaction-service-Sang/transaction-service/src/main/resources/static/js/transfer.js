@@ -21,7 +21,7 @@ const sourceAccInput = document.getElementById('sourceAcc');
             }
 
             // Gọi API lấy số dư (Port 8082)
-            fetch(`http://localhost:8082/api/transactions/balance/${accountNumber}`)
+            fetch(`http://localhost:8082/api/transService-Sang/balance/${accountNumber}`)
                 .then(response => {
                     if (response.ok) return response.json();
                     throw new Error("Không tìm thấy");
@@ -74,7 +74,7 @@ const sourceAccInput = document.getElementById('sourceAcc');
             };
 
             // 4. Gọi API xuống Backend (Cổng 8082 như đã cấu hình)
-            fetch('http://localhost:8082/api/transactions', {
+            fetch('http://localhost:8082/api/transService-Sang/chuyentien', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -117,16 +117,19 @@ public class TransactionService {
         if (currentUsername == null || currentUsername.isEmpty()) {
             throw new RuntimeException("Bạn chưa đăng nhập!");
         }
-
         // 2. Tìm Account của người này
         Account myAccount = accountRepository.findAccountByUsername(currentUsername)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản của user: " + currentUsername));
-
+        System.out.println("DEBUG: User đang login: " + currentUsername);
+        System.out.println("DEBUG: Số TK tìm được: " + myAccount.getAccountNumber());
+        int userid = myAccount.getUserId();
+        Account account = accountRepository.findByUserIdAndAccountType(userid,"PAYMENT");
+        //System.out.println("DEBUG: Loại TK: " + myAccount.);
         // 3. Gọi Repository để lấy lịch sử
         // Truyền myAccount vào cả 2 vị trí (tìm xem mình là người gửi HOẶC mình là người nhận)
-        List<Transaction> list1 = transactionRepository.findByFromAccountNumber(myAccount.getAccountNumber());
-        List<Transaction> list2 = transactionRepository.findByToAccountNumber(myAccount.getAccountNumber());
-        List<Transaction> list3 = new ArrayList<Transaction>();
+        List<Transaction> list1 = transactionRepository.findByFromAccountNumber(account.getAccountNumber());
+        List<Transaction> list2 = transactionRepository.findByToAccountNumber(account.getAccountNumber());
+        List<Transaction> list3 = new ArrayList<>();
         list3.addAll(list1);
         list3.addAll(list2);
         return list3;

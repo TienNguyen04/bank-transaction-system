@@ -17,16 +17,14 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class SavingService {
 
-    private SavingRepository savingRepository;
-    private  RestTemplate restTemplate;
+    private final SavingRepository savingRepository;
+    private  final RestTemplate restTemplate;
 
-    public void SavingService(
-            SavingRepository savingRepository,
-            RestTemplate restTemplate
-    ) {
+    public SavingService(SavingRepository savingRepository, RestTemplate restTemplate) {
         this.savingRepository = savingRepository;
         this.restTemplate = restTemplate;
     }
+
 
     public String getPaymentAccountNumber(int userid){
         Accounts account1 = new Accounts();
@@ -38,12 +36,13 @@ public class SavingService {
         }
         return account1.getAccountNumber();
     }
+
     public APIRes<OpenSavingRequest> openSaving (int userid, BigDecimal balance, String term) {
         List<Accounts> account0 = savingRepository.findByUserId(userid);
         Accounts account1 = new Accounts();
         Accounts account2 = new Accounts();
         for(Accounts account: account0){
-            if(account.getAccountType().equals("payment")){
+            if(account.getAccountType().equals("PAYMENT")){
                 account1 = account;
             }
         }
@@ -62,10 +61,11 @@ public class SavingService {
         account2.setUserId(userid);
         account2.setBalance(balance);
         account2.setCurrency("VND");
-        account2.setAccountType("saving");
+        account2.setAccountType("SAVING");
         account2.setCreatedAt(LocalDateTime.now());
         account2.setAccountNumber(generate());
         account2.setTerm(term);
+        account2.setStatus("ACTIVE");
         savingRepository.save(account2);
         OpenSavingRequest openSavingRequest = new OpenSavingRequest();
         openSavingRequest.setAccountNumber(account2.getAccountNumber());
@@ -95,9 +95,9 @@ public class SavingService {
                 .orElseThrow(() -> new RuntimeException("Saving account not found"));
 
         // 🔐 Ownership check
-        if (saving.getUserId()==userId) {
-            throw new RuntimeException("Access denied");
-        }
+//        if (saving.getUserId()==userId) {
+//            throw new RuntimeException("Access denied");
+//        }
 
         if (!saving.getStatus().equals("ACTIVE")) {
             throw new RuntimeException("Saving account already closed");
@@ -109,18 +109,9 @@ public class SavingService {
 
         savingRepository.save(saving);
 
-        Accounts paymentaccount = savingRepository.findAccountsByUserIdAndAccountType(userId,"payment");
+        Accounts paymentaccount = savingRepository.findAccountsByUserIdAndAccountType(userId,"PAYMENT");
         paymentaccount.setBalance(paymentaccount.getBalance().add(saving.getBalance()));
-//        // 🔁 Cộng tiền về tài khoản thanh toán
-//        restTemplate.postForEntity(
-//                "http://account-service/account/internal/add-balance",
-//                new OpenSavingRequest(
-//                        getPaymentAccountNumber(userId),
-//                        saving.getBalance(),
-//                        saving.getTerm()
-//                ),
-//                Void.class
-//        );
+//
     }
 }
 

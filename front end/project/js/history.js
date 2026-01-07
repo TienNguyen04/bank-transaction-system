@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8082/api/transactions"; // URL gốc
+const API_URL = "http://localhost:8082/transService-Sang/api";
+const history_api ="http://localhost:8082/transService-Sang/api/history" // URL gốc
 
 // Biến lưu số tài khoản của mình (sẽ được cập nhật từ API)
 let myAccountNumber = "";
@@ -8,12 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadData() {
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("token");
 
     // Nếu chưa đăng nhập (và không chạy mode test backdoor) thì đá về login
-    if (!token) {
-        // window.location.href = "login.html"; // Mở dòng này nếu muốn bắt buộc login
-    }
+    // if (!token) {
+    //     // window.location.href = "login.html"; // Mở dòng này nếu muốn bắt buộc login
+    // }
 
     const headers = {
         "Content-Type": "application/json",
@@ -22,18 +23,21 @@ async function loadData() {
 
     try {
         // 1. GỌI API LẤY THÔNG TIN TÀI KHOẢN TRƯỚC
-        const userRes = await fetch(`${API_URL}/my-account`, { method: "GET", headers: headers });
+        const userRes = await fetch(
+            `http://localhost:8080/accountService/account/my-paymentnumber`, 
+            { method: "GET", 
+                headers: headers });
 
         if (userRes.ok) {
             const userData = await userRes.json();
-            myAccountNumber = userData.accountNumber; // 👉 LẤY ĐƯỢC SỐ TK THẬT Ở ĐÂY
+            myAccountNumber = userData; // 👉 LẤY ĐƯỢC SỐ TK THẬT Ở ĐÂY
             console.log("Đang đăng nhập với STK:", myAccountNumber);
         } else {
             console.warn("Không lấy được thông tin user, logic màu sắc có thể sai.");
         }
-
+        
         // 2. SAU ĐÓ MỚI GỌI API LỊCH SỬ
-        const historyRes = await fetch(`${API_URL}/history`, { method: "GET", headers: headers });
+        const historyRes = await fetch(history_api, { method: "GET", headers: headers });
 
         if (!historyRes.ok) throw new Error("Lỗi tải lịch sử");
 
