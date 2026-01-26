@@ -1,10 +1,10 @@
-package com.example.NotificationService.service;
+package com.example.accountService.service;
 
-import com.example.NotificationService.dto.CreateNotificationRequest;
+import com.example.accountService.dto.request.CreateNotificationRequest;
 
-import com.example.NotificationService.enity.Notification;
-import com.example.NotificationService.dto.NotificationResponse;
-import com.example.NotificationService.repository.NotificationRepository;
+import com.example.accountService.model.Notification;
+import com.example.accountService.dto.response.NotificationResponse;
+import com.example.accountService.repository.NotificationRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,7 +37,7 @@ public class NotificationService {
 
     // 📥 Lấy danh sách notification theo user
     public List<NotificationResponse> getByUser(int userId) {
-        return repository.findByUserId(userId)
+        return repository.findByUserIdOrderByTimeDesc(userId)
                 .stream()
                 .map(n -> NotificationResponse.builder()
                         .id(n.getId())

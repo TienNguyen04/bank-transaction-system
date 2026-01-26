@@ -1,4 +1,4 @@
-package com.example.NotificationService.enity;
+package com.example.accountService.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "noti",schema = "notification")
+@Table(name = "noti")
 @Getter
 @Setter
 @NoArgsConstructor

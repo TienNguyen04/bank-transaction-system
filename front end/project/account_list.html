@@ -9,15 +9,17 @@
 <body>
 
 <!-- ================= HEADER ================= -->
+
 <header class="header">
     <div class="logo">Banking System</div>
-    <span id="headerUsername"></span>
+
     <nav class="navbar">
         <a href="home.html">Trang chủ</a>
         <a href="transfer.html">Chuyển khoản</a>
         <a href="notification.html">Thông báo</a>
-        <a href="history.html">Lịch sử giao dịch</a>
-        <a href="account_list.html" class="active">Danh sách tài khoản</a>
+        <a href="history.html" class="active" style="color: #0056d6;">Lịch sử giao dịch</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="goLogin()">Đăng xuất</a>
     </nav>
 
     <div class="user-box">
@@ -25,7 +27,6 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
             <div class="dropdown-content">
-                <a href="profile.html">Thông tin người dùng</a>
                 <a href="index.html">Đăng xuất</a>
             </div>
         </div>
@@ -90,17 +91,17 @@
     <div class="modal-card">
         <h2>CHỌN TÀI KHOẢN ĐỂ KHÓA</h2>
 
-        <div class="account-card">
+        <!-- <div class="account-card">
             <div>
                 <strong>NGUYỄN THÙY TIÊN</strong>
                 <p>STK: 790932459838</p>
                 <p>Số dư: 1,500,000 VND</p>
             </div>
             <input type="radio" name="lockAccount">
-        </div>
+        </div> -->
 
         <div class="action-center">
-            <button class="btn danger">Xác nhận khóa</button>
+            <button class="btn danger" onclick="goLogin()">Xác nhận khóa</button>
             <button class="btn secondary" onclick="backToList()">Quay lại</button>
         </div>
     </div>
