@@ -3,9 +3,9 @@ spring:
     name: NotificationService
 
   datasource:
-    url: jdbc:postgresql://26.169.181.65:5432/bankdb_sang
+    url: jdbc:postgresql://26.41.201.183:5432/bank_db
     username: postgres
-    password: 123456
+    password: 2162004
     driver-class-name: org.postgresql.Driver
 
   jpa:
