@@ -20,7 +20,7 @@ public class NotificationService {
         this.repository = repository;
     }
 
-    // 🔔 Tạo notification (internal call)
+    //  Tạo notification (internal call)
     public void create(CreateNotificationRequest request) {
 
         Notification noti = Notification.builder()
@@ -35,7 +35,7 @@ public class NotificationService {
         repository.save(noti);
     }
 
-    // 📥 Lấy danh sách notification theo user
+    //  Lấy danh sách notification theo user
     public List<NotificationResponse> getByUser(int userId) {
         return repository.findByUserIdOrderByTimeDesc(userId)
                 .stream()
@@ -50,7 +50,7 @@ public class NotificationService {
                 ).toList();
     }
 
-    // ✅ Đánh dấu đã đọc
+    //  Đánh dấu đã đọc
     public void markAsRead(Long id) {
         Notification noti = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Notification not found"));

@@ -89,7 +89,7 @@ public class AccountServiceIml implements AccountService {
         return String.valueOf(number);
     }
     public String getAccountName(String accountNumber) {
-        // 1. In ra xem nhận được số tài khoản gì (Kiểm tra thừa khoảng trắng)
+        //In ra xem nhận được số tài khoản gì (Kiểm tra thừa khoảng trắng)
         System.out.println("DEBUG: Đang tìm STK = [" + accountNumber + "]");
 
         String fullName = accountRepository.findUserNameByAccountNumber(accountNumber.trim());

@@ -57,7 +57,7 @@ public class SavingClient {
         HttpEntity<OpenSavingAccReq> entity =
                 new HttpEntity<>(body, headers);
 
-        // 4️⃣ Call
+        // 4️ Call
         restTemplate.postForEntity(
                 savingServiceUrl + "/private/opensaving",
                 entity,
