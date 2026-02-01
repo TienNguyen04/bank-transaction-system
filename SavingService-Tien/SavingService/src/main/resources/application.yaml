@@ -3,7 +3,7 @@ spring:
     name: savingService
 
   datasource:
-    url: jdbc:postgresql://26.41.201.183:5432/bank_db
+    url: jdbc:postgresql://26.41.201.183:5050/bank_db
     username: postgres
     password: 2162004
     driver-class-name: org.postgresql.Driver
