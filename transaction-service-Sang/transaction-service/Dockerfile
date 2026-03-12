@@ -1,7 +1,12 @@
+FROM ubuntu:latest
+LABEL authors="Admin"
+
+ENTRYPOINT ["top", "-b"]
 # 1. Chọn môi trường nền (Base Image)
 # Sử dụng bản Java 17 siêu nhẹ (Alpine) để file build ra có dung lượng nhỏ nhất
-FROM eclipse-temurin:17-jre-alpine
-
+#FROM eclipse-temurin:17-jre-alpine
+# Đổi từ 17 sang 21
+FROM eclipse-temurin:21-jre-alpine
 # 2. Tạo thư mục làm việc bên trong Container
 WORKDIR /app
 

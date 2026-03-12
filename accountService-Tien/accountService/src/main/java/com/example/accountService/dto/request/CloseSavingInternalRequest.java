@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 
 
@@ -19,6 +19,10 @@ public class CloseSavingInternalRequest {
 
     public void setSavingAccountNumber(String savingAccountNumber) {
         this.savingAccountNumber = savingAccountNumber;
+    }
+    public CloseSavingInternalRequest(String savingAccountNumber) {
+        this.savingAccountNumber = savingAccountNumber;
+
     }
 }
 

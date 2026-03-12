@@ -6,11 +6,15 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class OpenSavingAccReq {
     //private String accountNumber;
     private BigDecimal balance;
     private String term;
+    public OpenSavingAccReq(BigDecimal balance, String term) {
+        this.balance = balance;
+        this.term = term;
+    }
 }

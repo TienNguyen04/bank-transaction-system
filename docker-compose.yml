@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # 1. API GATEWAY (Chạy cổng 8086, mở ra cho Frontend gọi)
+  bank-gateway:
+    build: ./bank-gateway
+    ports:
+      - "8086:8086"
+    networks:
+      - bank-network
+
+  # 2. ACCOUNT SERVICE - Tiên (Cổng 8080)
+  account-service:
+    build: ./accountService-Tien/accountService
+    expose:
+      - "8080"
+    networks:
+      - bank-network
+
+  # 3. USER SERVICE - Linh (Cổng 8081)
+  user-service:
+    build: ./user-service-Linh/user-service
+    expose:
+      - "8081"
+    networks:
+      - bank-network
+
+  # 4. TRANSACTION SERVICE - Sang (Cổng 8082)
+  trans-service:
+    build: ./transaction-service-Sang/transaction-service
+    expose:
+      - "8082"
+    networks:
+      - bank-network
+
+  # 5. SAVING SERVICE - Tiên (Cổng 8083)
+  saving-service:
+    build: ./SavingService-Tien/SavingService
+    expose:
+      - "8083"
+    networks:
+      - bank-network
+
+  # 6. NOTIFICATION SERVICE - Nguyệt (Cổng 8084)
+  # (Giả sử Nguyệt chưa code xong, mình thêm dấu # để tạm tắt nó đi)
+  # noti-service:
+  #   build: ./noti-Nguyet
+  #   expose:
+  #     - "8084"
+  #   networks:
+  #     - bank-network
+
+
+  # 7. FRONTEND WEB
+  frontend-web:
+    build: ./front end/project
+    ports:
+      - "5500:80"
+    networks:
+      - bank-network
+# Tạo mạng nội bộ để 6 anh em tự nhìn thấy nhau
+networks:
+  bank-network:
+    driver: bridge
