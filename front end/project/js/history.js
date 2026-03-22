@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:8082/transService-Sang/api";
-const history_api ="http://localhost:8082/transService-Sang/api/history" // URL gốc
+const API_URL = "http://localhost:8086/transService-Sang/api";
+const history_api ="http://localhost:8086/transService-Sang/api/history" // URL gốc
 
 // Biến lưu số tài khoản của mình (sẽ được cập nhật từ API)
 let myAccountNumber = "";
@@ -24,7 +24,7 @@ async function loadData() {
     try {
         // 1. GỌI API LẤY THÔNG TIN TÀI KHOẢN TRƯỚC
         const userRes = await fetch(
-            `http://localhost:8080/accountService/account/my-paymentnumber`, 
+            `http://localhost:8086/accountService/account/my-paymentnumber`,
             { method: "GET", 
                 headers: headers });
 

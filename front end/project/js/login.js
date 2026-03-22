@@ -524,7 +524,7 @@ async function getCurrentUserInfo() {
         return null;
     }
 }
-fetch("http://localhost:8080/accountService/my-accounts", {
+fetch("http://localhost:8086/accountService/my-accounts", {
     headers: {
         "Authorization": "Bearer " + localStorage.getItem("token")
     }
