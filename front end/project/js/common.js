@@ -1,7 +1,7 @@
 // =========================
 // CONFIG
 // =========================
-const BASE_URL = "http://localhost:8086/accountService";
+const BASE_URL = "http://localhost:8080/accountService";
 
 // =========================
 // AUTH

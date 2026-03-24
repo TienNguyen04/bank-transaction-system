@@ -4,8 +4,8 @@
 
 const toggleBtn = document.getElementById("toggleMoney");
 //const balanceText = document.getElementById("balance");
-const account_url ="http://localhost:8086/accountService/account";
-const accountlist_api ="http://localhost:8086/accountService/account/my-accounts";
+const account_url ="http://localhost:8080/accountService/account";
+const accountlist_api ="http://localhost:8080/accountService/account/my-accounts";
 const token = localStorage.getItem("token");
 // if (toggleBtn && balanceText) {
 //     toggleBtn.addEventListener("click", () => {
@@ -48,7 +48,7 @@ async function loadUsser() {
     }
     const paymentAccount = paymentAccounts[0];
     const res1 = await fetch (
-            `http://localhost:8086/accountService/account/check-name/${paymentAccount.accountNumber}`,
+            `http://localhost:8080/accountService/account/check-name/${paymentAccount.accountNumber}`,
             {
                 method:"GET",
                 headers: 
@@ -106,6 +106,30 @@ window.addEventListener("DOMContentLoaded", () => {
     if (role !== "admin") {
         document.querySelectorAll(".admin-only").forEach(item => {
             item.style.display = "none";
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Tìm nút Đăng xuất bằng ID
+    const btnLogout = document.getElementById('btnLogout');
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', function(e) {
+            // e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a> nếu có
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('username');
+            localStorage.removeItem('role');
+            localStorage.removeItem('status');
+            localStorage.removeItem('email');
+            localStorage.removeItem('fullName');
+
+            // 2. Thông báo cho người dùng (tùy chọn)
+            alert("Bạn đã đăng xuất thành công!");
+
+            // 3. Chuyển hướng về trang Login ngay lập tức
+            window.location.href = 'index.html';
         });
     }
 });

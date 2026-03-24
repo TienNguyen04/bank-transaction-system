@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =================== CONFIG & VARIABLES ===================
-const API_BASE = "http://localhost:8086/accountService/account";
+const API_BASE = "http://localhost:8080/accountService/account";
 const accountlist_api = `${API_BASE}/my-accounts`;
 const opensaving_api = `${API_BASE}/opensaving`;
 const closesaving_api = `${API_BASE}/closesaving`;

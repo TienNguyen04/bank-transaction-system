@@ -12,8 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 @Data
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID) // Spring Boot 3 hỗ trợ sẵn
+    private String id; // Đổi kiểu dữ liệu từ Long sang String
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     // Hibernate tự động JOIN sang bảng accounts ở schema bên kia
     @ManyToOne

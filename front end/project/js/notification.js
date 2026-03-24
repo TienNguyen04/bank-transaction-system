@@ -1,6 +1,6 @@
 // 1. CẤU HÌNH ĐƯỜNG DẪN API
 // Lưu ý: Nếu Controller của bạn có @RequestMapping("/api") thì phải thêm /api vào
-const NOTI_API_URL = "http://localhost:8086/noti_Nguyet/noti/listnoti";
+const NOTI_API_URL = "http://localhost:8084/noti_Nguyet/noti/listnoti";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadNotifications();

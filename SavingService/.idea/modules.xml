@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SavingService/SavingService.iml" filepath="$PROJECT_DIR$/SavingService/SavingService.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SavingService-Tien.iml" filepath="$PROJECT_DIR$/.idea/SavingService-Tien.iml" />
     </modules>
   </component>
