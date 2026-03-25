@@ -187,7 +187,7 @@ async function handleTransferSubmit(event) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token // Đừng quên gửi Token khi chuyển tiền
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(requestData)
         });
@@ -216,3 +216,99 @@ async function handleTransferSubmit(event) {
         }
     }
 }
+
+// Biến lưu trữ dữ liệu tạm thời
+// let pendingRequestData = null;
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     loadAccounts();
+//     const transferForm = document.getElementById('transferForm');
+//     if (transferForm) {
+//         transferForm.addEventListener('submit', handleTransferSubmit);
+//     }
+
+//     // Gán sự kiện cho các nút trong Modal
+//     document.getElementById('cancelBtn').onclick = closeModal;
+//     document.getElementById('finalConfirmBtn').onclick = executeTransfer;
+// });
+
+// // 1. Khi bấm nút "Xác nhận chuyển tiền" trên Form chính
+// async function handleTransferSubmit(event) {
+//     event.preventDefault();
+
+//     // Lấy dữ liệu từ form
+//     const sourceAcc = document.getElementById('sourceAcc').value;
+//     const receiverAcc = document.getElementById('receiverAcc').value;
+//     const amount = document.getElementById('amount').value;
+//     const note = document.getElementById('note').value;
+
+//     if (!sourceAcc || !receiverAcc || !amount) {
+//         alert("Vui lòng điền đầy đủ thông tin!");
+//         return;
+//     }
+
+//     // Lưu dữ liệu vào biến tạm
+//     pendingRequestData = {
+//         fromAccountNumber: sourceAcc,
+//         toAccountNumber: receiverAcc,
+//         amount: parseFloat(amount),
+//         type: "TRANSFER",
+//         description: note || "Chuyển tiền nhanh"
+//     };
+
+//     // Hiển thị Modal nhập mật khẩu
+//     document.getElementById('passwordModal').style.display = 'flex';
+// }
+
+// // 2. Khi bấm "Xác nhận" bên trong Modal
+// async function executeTransfer() {
+//     const password = document.getElementById('confirmPassword').value;
+//     const token = localStorage.getItem("token");
+//     const submitBtn = document.querySelector('.confirm-btn'); // Nút ngoài form chính
+//     const finalConfirmBtn = document.getElementById('finalConfirmBtn');
+
+//     if (!password) {
+//         alert("Vui lòng nhập mật khẩu xác nhận!");
+//         return;
+//     }
+
+//     // Thêm mật khẩu vào requestData (Nếu Backend của bạn yêu cầu verify password)
+//     // pendingRequestData.password = password; 
+
+//     try {
+//         // Disable nút trong modal để tránh click trùng
+//         finalConfirmBtn.disabled = true;
+//         finalConfirmBtn.innerText = "Đang xác thực...";
+
+//         const response = await fetch('http://localhost:8082/transService-Sang/api/chuyentien', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': 'Bearer ' + token
+//             },
+//             body: JSON.stringify(pendingRequestData)
+//         });
+
+//         if (response.ok) {
+//             const data = await response.json();
+//             alert("✅ Giao dịch thành công!");
+//             closeModal();
+//             document.getElementById('transferForm').reset();
+//             loadAccounts();
+//         } else {
+//             const text = await response.text();
+//             throw new Error(text);
+//         }
+//     } catch (error) {
+//         alert("❌ Giao dịch thất bại: " + error.message);
+//     } finally {
+//         finalConfirmBtn.disabled = false;
+//         finalConfirmBtn.innerText = "Xác nhận";
+//     }
+// }
+
+// function closeModal() {
+//     document.getElementById('passwordModal').style.display = 'none';
+//     document.getElementById('confirmPassword').value = ''; // Xóa mật khẩu đã nhập
+//     pendingRequestData = null;
+// }

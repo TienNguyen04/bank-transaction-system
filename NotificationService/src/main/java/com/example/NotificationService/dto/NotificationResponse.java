@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Builder
 public class NotificationResponse {
 
-    private Long id;
+    //private String id;
     private String title;
-    private String accountNumber;
+//    private String accountNumber;
     private String content;
     private String status;
     private LocalDateTime time;

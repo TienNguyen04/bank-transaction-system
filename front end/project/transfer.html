@@ -42,6 +42,17 @@
         }
     </style>
 </head>
+<!-- <div id="passwordModal" class="modal">
+    <div class="modal-content">
+        <h3>Xác nhận giao dịch</h3>
+        <p>Vui lòng nhập mật khẩu để hoàn tất chuyển tiền</p>
+        <input type="password" id="confirmPassword" placeholder="Nhập mật khẩu của bạn">
+        <div class="modal-buttons">
+            <button type="button" id="cancelBtn" class="btn-secondary">Hủy</button>
+            <button type="button" id="finalConfirmBtn" class="btn-primary">Xác nhận</button>
+        </div>
+    </div>
+</div> -->
 <body>
 
 
@@ -88,8 +99,8 @@
         <label style="margin-top: 15px;">Ngân hàng nhận:</label>
         <select id="bankReceiver">
             <option value="INTERNAL">Nội bộ (Banking System)</option>
-            <option value="BANK_A">Ngân hàng A (Liên kết)</option>
-            <option value="BANK_B">Ngân hàng B (Liên kết)</option>
+            <!-- <option value="BANK_A">Ngân hàng A (Liên kết)</option>
+            <option value="BANK_B">Ngân hàng B (Liên kết)</option> -->
         </select>
 
         <label>Số tài khoản nhận:</label>
@@ -100,7 +111,7 @@
         <input type="text" id="receiverName" readonly>
 
         <label>Số tiền (VND):</label>
-        <input type="number" id="amount" placeholder="Nhập số tiền cần chuyển" required min="10000">
+        <input type="number" id="amount" placeholder="Nhập số tiền cần chuyển" required min="10000" required max="500000000">
 
         <label>Nội dung:</label>
         <input type="text" id="note" placeholder="Nội dung chuyển tiền (Không dấu)">

@@ -31,18 +31,16 @@ public class NotificationService {
                 .status("UNREAD")
                 .time(LocalDateTime.now())
                 .build();
-
         repository.save(noti);
     }
 
     // 📥 Lấy danh sách notification theo user
     public List<NotificationResponse> getByUser(int userId) {
+
         return repository.findByUserId(userId)
                 .stream()
                 .map(n -> NotificationResponse.builder()
-                        .id(n.getId())
                         .title(n.getTitle())
-                        .accountNumber(n.getAccountNumber())
                         .content(n.getContent())
                         .status(n.getStatus())
                         .time(n.getTime())
@@ -51,10 +49,10 @@ public class NotificationService {
     }
 
     // ✅ Đánh dấu đã đọc
-    public void markAsRead(Long id) {
-        Notification noti = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Notification not found"));
-        noti.setStatus("READ");
-        repository.save(noti);
-    }
+//    public void markAsRead(int id) {
+//        Notification noti = repository.findByUserId(id)
+//                .orElseThrow(() -> new RuntimeException("Notification not found"));
+//        noti.setStatus("READ");
+//        repository.save(noti);
+//    }
 }

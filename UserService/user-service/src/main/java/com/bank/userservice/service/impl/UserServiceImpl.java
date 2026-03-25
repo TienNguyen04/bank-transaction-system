@@ -2,7 +2,9 @@ package com.bank.userservice.service.impl;
 
 import com.bank.userservice.config.JwtTokenProvider;
 import com.bank.userservice.dto.*;
+import com.bank.userservice.entity.Notification;
 import com.bank.userservice.entity.User;
+import com.bank.userservice.repository.NotiRepository;
 import com.bank.userservice.repository.UserRepository;
 import com.bank.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final RestTemplate restTemplate;
+    private final NotiRepository notiRepository;
 
     @Override
     public AuthResponse login(AuthRequest request) {
@@ -74,6 +77,14 @@ public class UserServiceImpl implements UserService {
 
         // Gửi token đến các service khác (bất đồng bộ)
         broadcastTokenToOtherServices(token, user);
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Đăng nhập thành công! ");
+        noti.setTitle(" Thông báo phiên đăng nhập mới ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
 
         return authResponse;
     }
@@ -164,6 +175,15 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         User savedUser = userRepository.save(user);
+
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Bạn đã tạo tài khoản thành công! ");
+        noti.setTitle(" Thông báo tạo tài khoa mới ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
         return mapToResponse(savedUser);
     }
 
@@ -195,6 +215,14 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedAt(LocalDateTime.now());
         User updatedUser = userRepository.save(user);
 
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Cập nhật thông tin thành công! ");
+        noti.setTitle(" Thông báo cập nhật thông tin ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
         return mapToResponse(updatedUser);
     }
 
@@ -212,6 +240,16 @@ public class UserServiceImpl implements UserService {
         // Update to new password
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.setUpdatedAt(LocalDateTime.now());
+
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Đổi mật khẩu thành công! ");
+        noti.setTitle(" Thông báo thay đổi thông tin ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
+
         userRepository.save(user);
     }
 
@@ -336,7 +374,16 @@ public class UserServiceImpl implements UserService {
         // Update password
         user.setPassword(passwordEncoder.encode(newPassword));
         user.setUpdatedAt(LocalDateTime.now());
+
         userRepository.save(user);
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Đổi mật khẩu thành công! ");
+        noti.setTitle(" Thông báo thay đổi thông tin ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
     }
 
     @Override
@@ -359,7 +406,14 @@ public class UserServiceImpl implements UserService {
 
         user.setUpdatedAt(LocalDateTime.now());
         User updatedUser = userRepository.save(user);
-
+        Notification noti = new Notification();
+        noti.setAccountNumber("");
+        noti.setTime(LocalDateTime.now());
+        noti.setContent(" Đã thay đổi thông tin người dùng ");
+        noti.setTitle(" Thông báo thay đổi thông tin ");
+        noti.setUserId(user.getId());
+        noti.setStatus(" UNREAD ");
+        notiRepository.save(noti);
         return mapToResponse(updatedUser);
     }
 

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CreateNotificationRequest {
 
-    private Long userId;
+    private int userId;
     private String title;
     private String accountNumber;
     private String content;

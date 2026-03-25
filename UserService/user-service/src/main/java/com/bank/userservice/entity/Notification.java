@@ -1,4 +1,4 @@
-package com.example.NotificationService.enity;
+package com.bank.userservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Column(name = "user_id")
-    private int userId;
+    private Long userId;
     @Column(name = "title")
     private String title;
     @Column(name = "account_number")

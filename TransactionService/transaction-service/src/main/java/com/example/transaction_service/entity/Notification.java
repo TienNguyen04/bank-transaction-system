@@ -1,4 +1,4 @@
-package com.example.NotificationService.enity;
+package com.example.transaction_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

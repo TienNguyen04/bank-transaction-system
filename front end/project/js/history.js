@@ -71,22 +71,22 @@ function renderTable(data) {
         let amountSign = "+";
 
         // Logic tô màu dựa trên myAccountNumber vừa lấy được
-        if (tx.type === "DEPOSIT") {
+        if (tx.type == "DEPOSIT") {
             typeLabel = "Nạp tiền";
             colorClass = "receive";
             amountSign = "+";
             partnerName = "Tại quầy/ATM";
         }
-        else if (tx.type === "WITHDRAW") {
+        else if (tx.type == "WITHDRAW") {
             typeLabel = "Rút tiền";
             colorClass = "send";
             amountSign = "-";
             isMoneyOut = true;
             partnerName = "ATM";
         }
-        else if (tx.type === "TRANSFER") {
+        else if (tx.type == "TRANSFER") {
             // So sánh với số tài khoản thật lấy từ API
-            if (tx.fromAccountNumber === myAccountNumber) {
+            if (tx.fromAccountNumber == myAccountNumber) {
                 typeLabel = "Chuyển đi";
                 colorClass = "send";
                 amountSign = "-";
@@ -96,7 +96,7 @@ function renderTable(data) {
                 typeLabel = "Nhận tiền";
                 colorClass = "receive";
                 amountSign = "+";
-                partnerName = tx.fromAccountNumber;
+                partnerName = tx.toAccountNumber;
             }
         }
 
