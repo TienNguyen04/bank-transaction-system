@@ -111,7 +111,6 @@ public class SavingService {
 
         Accounts paymentaccount = savingRepository.findAccountsByUserIdAndAccountType(userId,"PAYMENT");
         paymentaccount.setBalance(paymentaccount.getBalance().add(saving.getBalance()));
-//
     }
 }
 
